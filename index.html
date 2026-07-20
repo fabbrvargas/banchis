@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Splash Labs · Banchis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,700;9..144,900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --noche:#14120E;
+    --noche-2:#1C1914;
+    --noche-3:#252118;
+    --hueso:#F5F0E4;
+    --hueso-tenue:#B8B0A0;
+    --tenue:#8A8175;
+    --frito:#E8A33D;
+    --maqueno:#6E8F5E;
+    --linea:rgba(245,240,228,.13);
+    --display:'Fraunces',Georgia,serif;
+    --texto:'DM Sans',system-ui,sans-serif;
+    --max:1180px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--noche);color:var(--hueso);
+    font-family:var(--texto);font-size:17px;line-height:1.7;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 32px}
+  section{padding:110px 0;border-top:1px solid var(--linea)}
+  section:first-of-type{border-top:none}
+
+  .eyebrow{
+    font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--frito);font-weight:700;margin-bottom:22px;
+  }
+  h2{
+    font-family:var(--display);font-weight:500;
+    font-size:clamp(30px,4.4vw,50px);line-height:1.12;
+    letter-spacing:-.02em;margin-bottom:26px;
+    font-variation-settings:'SOFT' 40,'WONK' 1;
+  }
+  h3{font-family:var(--display);font-weight:700;font-size:23px;line-height:1.25;margin-bottom:12px;font-variation-settings:'SOFT' 30}
+  p{color:var(--hueso-tenue);max-width:62ch}
+  p + p{margin-top:16px}
+  strong{color:var(--hueso);font-weight:500}
+  em{color:var(--frito);font-style:normal}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:96vh;display:flex;flex-direction:column;justify-content:center;
+    padding:120px 0 90px;position:relative;
+  }
+  .hero::after{
+    content:"";position:absolute;inset:0;z-index:-1;
+    background:radial-gradient(900px 500px at 78% 12%,rgba(232,163,61,.13),transparent 62%),
+               radial-gradient(700px 420px at 8% 88%,rgba(110,143,94,.10),transparent 60%);
+  }
+  .marca{
+    display:flex;align-items:center;gap:14px;
+    font-size:12px;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--tenue);margin-bottom:64px;
+  }
+  .marca span{width:34px;height:1px;background:var(--frito)}
+  .hero h1{
+    font-family:var(--display);font-weight:300;
+    font-size:clamp(40px,7.4vw,90px);line-height:1.03;
+    letter-spacing:-.035em;max-width:16ch;
+    font-variation-settings:'SOFT' 50,'WONK' 1;
+  }
+  .hero h1 b{font-weight:900;color:var(--frito);font-style:italic}
+  .hero-sub{
+    margin-top:36px;font-size:clamp(17px,2vw,21px);
+    color:var(--hueso-tenue);max-width:56ch;line-height:1.6;
+  }
+  .hero-pie{
+    margin-top:70px;padding-top:26px;border-top:1px solid var(--linea);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:18px;
+    font-size:13px;color:var(--tenue);letter-spacing:.05em;
+  }
+
+  /* ---------- CONTRASTE (firma) ---------- */
+  .contraste{
+    display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+    gap:20px;margin:56px 0 12px;
+    background:var(--noche-2);border:1px solid var(--linea);
+    border-radius:20px;padding:52px 40px;
+  }
+  .cifra{text-align:center}
+  .cifra b{
+    display:block;font-family:var(--display);font-weight:900;
+    font-size:clamp(48px,8vw,86px);line-height:1;letter-spacing:-.04em;
+    font-variation-settings:'SOFT' 20;
+  }
+  .cifra.si b{color:var(--frito)}
+  .cifra.no b{color:var(--tenue)}
+  .cifra small{
+    display:block;margin-top:14px;font-size:12.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--tenue);line-height:1.6;
+  }
+  .versus{
+    font-family:var(--display);font-style:italic;font-size:20px;
+    color:var(--tenue);padding:0 8px;
+  }
+  .nota-contraste{
+    text-align:center;font-size:15px;color:var(--tenue);
+    max-width:none;margin-top:30px;font-style:italic;
+  }
+
+  /* ---------- LISTAS ---------- */
+  .lectura{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:2px;margin-top:52px}
+  .lectura div{background:var(--noche-2);padding:32px 28px}
+  .lectura div:first-child{border-radius:16px 0 0 16px}
+  .lectura div:last-child{border-radius:0 16px 16px 0}
+  .lectura h4{
+    font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--maqueno);font-weight:700;margin-bottom:14px;
+  }
+  .lectura p{font-size:15.5px;line-height:1.65}
+
+  /* ---------- CASOS ---------- */
+  .caso{margin-top:96px}
+  .caso:first-of-type{margin-top:56px}
+  .caso-head{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;margin-bottom:8px}
+  .caso-head .tag{
+    font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--noche);background:var(--frito);
+    padding:5px 12px;border-radius:99px;font-weight:700;
+  }
+  .caso > p{margin-top:14px}
+
+  .video-marco{
+    margin-top:34px;background:var(--noche-2);border:1px solid var(--linea);
+    border-radius:20px;padding:16px;
+  }
+  .video-marco.vertical{max-width:400px}
+  video{width:100%;display:block;border-radius:12px;background:#000}
+  .video-pie{
+    font-size:12.5px;color:var(--tenue);letter-spacing:.06em;
+    padding:14px 6px 4px;text-align:center;
+  }
+
+  .frames{display:grid;gap:14px;margin-top:34px}
+  .frames.v{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+  .frames.h{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .frames img{
+    width:100%;height:100%;object-fit:cover;display:block;
+    border-radius:14px;border:1px solid var(--linea);
+  }
+
+  /* ---------- TERRITORIOS ---------- */
+  .terr{border-top:1px solid var(--linea);padding:44px 0;display:grid;grid-template-columns:76px 1fr;gap:32px}
+  .terr .num{
+    font-family:var(--display);font-weight:900;font-size:40px;
+    color:var(--noche-3);line-height:.9;letter-spacing:-.04em;
+  }
+  .terr .idea{
+    margin-top:18px;padding-left:20px;border-left:2px solid var(--maqueno);
+    font-size:15.5px;color:var(--tenue);max-width:62ch;
+  }
+  .terr .idea b{color:var(--hueso-tenue);font-weight:500}
+
+  /* ---------- PLAZOS ---------- */
+  .plazos{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:52px}
+  .plazo{
+    background:var(--noche-2);border:1px solid var(--linea);
+    border-radius:20px;padding:38px 34px;
+  }
+  .plazo.destacado{border-color:rgba(232,163,61,.45);background:linear-gradient(165deg,rgba(232,163,61,.09),var(--noche-2) 55%)}
+  .plazo .dur{
+    font-family:var(--display);font-weight:900;font-size:34px;
+    letter-spacing:-.03em;margin-bottom:6px;
+  }
+  .plazo.destacado .dur{color:var(--frito)}
+  .plazo .rol{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--tenue);margin-bottom:20px}
+  .plazo ul{list-style:none;margin-top:6px}
+  .plazo li{
+    font-size:15px;color:var(--hueso-tenue);padding-left:20px;
+    position:relative;margin-bottom:11px;line-height:1.55;
+  }
+  .plazo li::before{content:"—";position:absolute;left:0;color:var(--maqueno)}
+
+  /* ---------- CREDENCIALES ---------- */
+  .creds{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:var(--linea);border-radius:16px;overflow:hidden;margin-top:48px}
+  .creds div{background:var(--noche);padding:30px 26px}
+  .creds b{display:block;font-family:var(--display);font-weight:700;font-size:19px;margin-bottom:8px}
+  .creds span{font-size:14px;color:var(--tenue);line-height:1.55}
+
+  /* ---------- CIERRE ---------- */
+  .cierre{text-align:center;padding:120px 0 60px}
+  .cierre h2{max-width:20ch;margin:0 auto 24px}
+  .cierre p{margin:0 auto;text-align:center}
+  .btn{
+    display:inline-block;margin-top:42px;background:var(--frito);color:var(--noche);
+    font-weight:700;font-size:16px;padding:17px 42px;border-radius:99px;
+    text-decoration:none;letter-spacing:.01em;transition:transform .2s ease,box-shadow .2s ease;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(232,163,61,.26)}
+  .btn:focus-visible{outline:2px solid var(--hueso);outline-offset:4px}
+  footer{
+    border-top:1px solid var(--linea);padding:34px 0;
+    font-size:12.5px;color:var(--tenue);display:flex;
+    justify-content:space-between;flex-wrap:wrap;gap:12px;letter-spacing:.05em;
+  }
+
+  /* ---------- REVEAL ---------- */
+  .rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+  .rv.on{opacity:1;transform:none}
+
+  @media (max-width:820px){
+    .wrap{padding:0 22px}
+    section{padding:76px 0}
+    .contraste{grid-template-columns:1fr;gap:28px;padding:38px 26px}
+    .versus{text-align:center}
+    .lectura{gap:12px}
+    .lectura div,.lectura div:first-child,.lectura div:last-child{border-radius:14px}
+    .plazos{grid-template-columns:1fr}
+    .terr{grid-template-columns:1fr;gap:10px}
+    .terr .num{font-size:30px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+    .rv{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="wrap">
+    <div class="marca"><span></span> Splash Labs para Banchis</div>
+    <h1>Nadie recuerda el sabor. Recuerdan <b>dónde estaban</b>.</h1>
+    <p class="hero-sub">
+      La colación del colegio. La funda comprada en la tienda de la esquina.
+      El paquete que se abre antes de que empiece la película. Banchis lleva
+      treinta años dentro de recuerdos ecuatorianos — y ninguno de esos
+      recuerdos está hoy en sus redes.
+    </p>
+    <div class="hero-pie">
+      <span>Portafolio y lectura de marca</span>
+      <span>Julio 2026</span>
+      <span>Documento privado</span>
+    </div>
+  </div>
+</header>
+
+<!-- ============ LO QUE VEMOS ============ -->
+<section>
+  <div class="wrap rv">
+    <div class="eyebrow">Lo que vemos en Banchis</div>
+    <h2>Una marca que está en todas partes menos en la conversación.</h2>
+    <p>
+      Más de treinta años produciendo desde Sangolquí. Presencia en quince provincias.
+      Producto en percha en Quito, Guayaquil y Cuenca. Y una línea que va mucho
+      más allá del chifle natural: picante, limón, cebolla, yuquitas, papitas y cueritos.
+    </p>
+    <p>
+      Eso es una marca consolidada. Lo que sigue no es una crítica — es la oportunidad
+      más grande que tienen sobre la mesa.
+    </p>
+
+    <div class="contraste">
+      <div class="cifra si">
+        <b>15</b>
+        <small>provincias con<br>producto en percha</small>
+      </div>
+      <div class="versus">frente a</div>
+      <div class="cifra no">
+        <b>846</b>
+        <small>seguidores en<br>Instagram</small>
+      </div>
+    </div>
+    <p class="nota-contraste">
+      El último video publicado en la cuenta es de abril de 2025.
+    </p>
+
+    <div class="lectura">
+      <div>
+        <h4>Lo construido</h4>
+        <p>Marca reconocida, distribución nacional real y una historia de tres décadas. Nada de eso hay que inventarlo.</p>
+      </div>
+      <div>
+        <h4>Lo no contado</h4>
+        <p>El maqueño en lugar del plátano común. La planta. La gente. Toda una línea de productos que el consumidor no asocia con la marca.</p>
+      </div>
+      <div>
+        <h4>La ventaja</h4>
+        <p>Partir de abajo significa que todo movimiento se nota. En una marca con cien mil seguidores, tres meses de trabajo no se ven. Aquí sí.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CÓMO TRABAJAMOS COMIDA ============ -->
+<section>
+  <div class="wrap rv">
+    <div class="eyebrow">Cómo contamos marcas de comida</div>
+    <h2>Producto real dentro de mundos construidos.</h2>
+    <p>
+      Es nuestra firma y funciona particularmente bien con alimentos: fotografía real
+      del producto — su textura, su brillo, su color verdadero — insertada dentro de
+      universos gráficos ilustrados. El producto nunca se vuelve un dibujo. El mundo
+      alrededor sí. Así el antojo se mantiene intacto y la marca gana una voz visual propia.
+    </p>
+
+    <!-- CASO CYRANO -->
+    <article class="caso">
+      <div class="caso-head">
+        <h3>Cyrano</h3>
+        <span class="tag">Panadería ecuatoriana · 9:16</span>
+      </div>
+      <p>
+        Una marca que lleva décadas en la mesa de los quiteños. En lugar de mostrar
+        producto, mostramos ciudad: San Francisco, el Panecillo, la Mitad del Mundo,
+        dibujados a línea, con el pan y los postres reales integrados en la arquitectura.
+        El resultado no habla de panadería — habla de pertenencia.
+      </p>
+
+      <div class="video-marco vertical">
+        <!-- Reemplazar por el archivo real: videos/cyrano.mp4 -->
+        <video controls preload="metadata" poster="assets/cyrano.jpg">
+          <source src="videos/cyrano.mp4" type="video/mp4">
+        </video>
+        <div class="video-pie">Cyrano — El sabor de Quito</div>
+      </div>
+
+      <div class="frames v">
+        <img src="assets/hogar.jpg" alt="Fotograma: la iglesia de San Francisco ilustrada con panetones reales como cúpulas">
+        <img src="assets/barrios.jpg" alt="Fotograma: la Virgen del Panecillo sobre un postre real">
+        <img src="assets/sabores.jpg" alt="Fotograma: la Mitad del Mundo coronada con un pan real">
+      </div>
+    </article>
+
+    <!-- CASO KRISPY KREME -->
+    <article class="caso">
+      <div class="caso-head">
+        <h3>Krispy Kreme</h3>
+        <span class="tag">Marca global · Motion graphics y 3D</span>
+      </div>
+      <p>
+        Pieza institucional de motion graphics y animación 3D sobre los valores de la
+        marca, producida para uso interno y hoy en exhibición en sus oficinas de la
+        región ibérica. Un encargo así exige precisión de manual de marca y consistencia
+        en cada cuadro — el mismo estándar que aplicamos a proyectos locales.
+      </p>
+
+      <div class="video-marco">
+        <!-- Reemplazar por el archivo real: videos/krispykreme.mp4 -->
+        <video controls preload="metadata" poster="assets/buen_rollo.jpg">
+          <source src="videos/krispykreme.mp4" type="video/mp4">
+        </video>
+        <div class="video-pie">Krispy Kreme — Pieza institucional</div>
+      </div>
+
+      <div class="frames h">
+        <img src="assets/gente.jpg" alt="Fotograma: composición tipográfica con donas reales">
+        <img src="assets/alegria.jpg" alt="Fotograma: donas reales con globos de diálogo ilustrados">
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ TERRITORIOS ============ -->
+<section>
+  <div class="wrap rv">
+    <div class="eyebrow">Tres territorios para Banchis</div>
+    <h2>No ideas de posteo. Territorios donde la marca puede vivir.</h2>
+    <p>
+      Cada uno responde a un objetivo distinto del negocio. No se ejecutan a la vez:
+      se construyen en orden, y cada uno alimenta al siguiente.
+    </p>
+
+    <div class="terr">
+      <div class="num">01</div>
+      <div>
+        <h3>Un recuerdo con funda</h3>
+        <p>
+          Banchis no compite en la góndola de snacks: compite en la memoria. La colación
+          que el papá manda al colegio. La funda comprada en la tienda del barrio con lo
+          que sobró del recreo. El paquete que se abre antes de la película. Toda una
+          generación de ecuatorianos tiene esos recuerdos y no sabe que son de una marca
+          con nombre. Ese territorio ya es de Banchis — solo falta reclamarlo.
+        </p>
+        <div class="idea">
+          <b>Cómo se ve:</b> la funda real dentro de escenas ilustradas de tienda de barrio,
+          patio de escuela y sala de cine. Serie continua, no campaña suelta. Es el
+          territorio que abre todo lo demás, y va primero.
+        </div>
+      </div>
+    </div>
+
+    <div class="terr">
+      <div class="num">02</div>
+      <div>
+        <h3>Banchis no es solo el chifle</h3>
+        <p>
+          Yuquitas, papitas, cueritos, y el chifle en picante, limón y cebolla. Es una
+          línea completa que el consumidor no tiene asociada a la marca: pide chifles
+          Banchis y no sabe que el resto de la percha también es suya. Ese
+          desconocimiento es venta que ya está producida y no se está capturando.
+        </p>
+        <div class="idea">
+          <b>Cómo se ve:</b> cada producto con personalidad propia dentro del mismo
+          universo gráfico — no un catálogo, un elenco. Sirve directamente a valor por
+          ticket y a rotación de los productos menos conocidos.
+        </div>
+      </div>
+    </div>
+
+    <div class="terr">
+      <div class="num">03</div>
+      <div>
+        <h3>Maqueño, no plátano</h3>
+        <p>
+          El chifle Banchis se hace con maqueño. Es una decisión de producto que define
+          textura y sabor, y hoy no la sabe nadie. Sumado a treinta años de planta propia
+          en Sangolquí y a un equipo real detrás, ahí hay una historia de autoridad que
+          ninguna marca nueva puede copiar ni improvisar.
+        </p>
+        <div class="idea">
+          <b>Cómo se ve:</b> materia prima, proceso y gente — con dirección de arte, no
+          con video corporativo. La calidad como relato, no como sello en el empaque.
+          Es también el material que mejor funciona fuera del país.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PLAZOS ============ -->
+<section>
+  <div class="wrap rv">
+    <div class="eyebrow">Cómo se construye</div>
+    <h2>Una marca de treinta años no se cuenta en una campaña.</h2>
+    <p>
+      Publicar piezas sueltas produce contenido que se pierde en el feed. Construir un
+      territorio produce una marca que la gente reconoce sin ver el logo. Lo segundo
+      necesita tiempo, y por eso trabajamos en ciclos.
+    </p>
+
+    <div class="plazos">
+      <div class="plazo">
+        <div class="dur">3 meses</div>
+        <div class="rol">Fase de instalación</div>
+        <ul>
+          <li>Definición de territorio y lenguaje visual propio de Banchis</li>
+          <li>Producción continua sobre un solo territorio, hasta que se reconozca</li>
+          <li>Reactivación de la cuenta con ritmo sostenido</li>
+          <li>Primera lectura de datos reales para decidir el siguiente paso</li>
+        </ul>
+      </div>
+      <div class="plazo destacado">
+        <div class="dur">6 meses</div>
+        <div class="rol">Fase de construcción</div>
+        <ul>
+          <li>Los tres territorios desplegados en secuencia</li>
+          <li>Pieza mayor de marca — el equivalente a lo hecho para Cyrano</li>
+          <li>Contenido que da soporte a crecimiento fuera del país, si es prioridad</li>
+          <li>Sistema de marca instalado: Banchis queda con voz visual propia</li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin-top:28px;font-size:15px;color:var(--tenue)">
+      Los alcances y valores de cada ciclo se definen en conversación, según lo que
+      Banchis quiera priorizar primero.
+    </p>
+  </div>
+</section>
+
+<!-- ============ SPLASH LABS ============ -->
+<section>
+  <div class="wrap rv">
+    <div class="eyebrow">Quiénes somos</div>
+    <h2>Splash Labs</h2>
+    <p>
+      Agencia de producción de contenido y dirección creativa con base en Quito.
+      Trabajamos con marcas locales que quieren dejar de sonar locales y con marcas
+      globales que necesitan ejecución precisa. Estrategia, producción y edición
+      bajo el mismo techo.
+    </p>
+
+    <div class="creds">
+      <div><b>Krispy Kreme</b><span>Pieza institucional en exhibición en la región ibérica</span></div>
+      <div><b>Cyrano</b><span>Video de marca sobre Quito y memoria colectiva</span></div>
+      <div><b>Coca-Cola · Multicines</b><span>Producción y edición para campañas de marca</span></div>
+      <div><b>CT Gaming</b><span>Contenido para la organización de esports de Natanael Cano</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CIERRE ============ -->
+<section class="cierre">
+  <div class="wrap rv">
+    <div class="eyebrow">El siguiente paso</div>
+    <h2>Hablemos de cuál de los tres territorios va primero.</h2>
+    <p>
+      Este documento no es una cotización. Es la prueba de que ya estuvimos pensando
+      en Banchis antes de que nos lo pidieran. Si algo de lo que está aquí resuena,
+      la conversación siguiente es corta: elegir por dónde empezar.
+    </p>
+    <a class="btn" href="https://wa.me/593984712418?text=Hola%20Fabi%C3%A1n%2C%20vi%20el%20documento%20que%20prepararon%20para%20Banchis%20y%20me%20gustar%C3%ADa%20conversar." target="_blank" rel="noreferrer">
+      Conversemos por WhatsApp
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;width:100%">
+    <span>Splash Labs · Quito, Ecuador</span>
+    <span>Documento preparado para Banchisfood S.A. · Confidencial</span>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((es)=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });
+  },{threshold:.12});
+  document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

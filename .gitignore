@@ -1,0 +1,5 @@
+.DS_Store
+
+# Excluido del repositorio: supera el límite de 100 MB de GitHub y haría fallar el push.
+# Cuando lo reemplaces por una versión comprimida (< 100 MB), BORRA la línea de abajo y haz commit.
+videos/krispykreme.mp4
