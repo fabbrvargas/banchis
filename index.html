@@ -154,6 +154,14 @@
   .frames.h{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
   .frames img{width:100%;height:100%;object-fit:cover;display:block;border:var(--b) solid var(--tinta)}
 
+  /* Caso Cyrano: video vertical y sus 3 frames en una sola fila horizontal.
+     El video ocupa la primera columna; los 3 frames comparten el resto,
+     estirados a la misma altura del video. */
+  .cyrano-fila{display:grid;grid-template-columns:minmax(210px,290px) 1fr;gap:var(--b);align-items:stretch;margin-top:38px}
+  .cyrano-fila .video-marco{margin:0;width:100%;max-width:none}
+  .cyrano-fila .frames{margin-top:0;height:100%}
+  .cyrano-fila .frames.v{grid-template-columns:repeat(3,1fr)}
+
   /* ---------- TERRITORIOS (bloque noche) ---------- */
   .terr{border-top:var(--b) solid var(--frito);padding:48px 0;display:grid;grid-template-columns:92px 1fr;gap:32px}
   .terr .num{font-family:var(--display);font-weight:900;font-size:58px;color:var(--frito);line-height:.85;letter-spacing:-.045em}
@@ -215,6 +223,10 @@
     .terr{grid-template-columns:1fr;gap:12px}
     .terr .num{font-size:46px}
     .video-marco,.video-marco.vertical{width:100%;max-width:100%}
+    /* la fila de Cyrano se apila: video centrado arriba, 3 frames en fila debajo */
+    .cyrano-fila{grid-template-columns:1fr}
+    .cyrano-fila .video-marco{max-width:320px;margin:0 auto}
+    .cyrano-fila .frames{margin-top:var(--b)}
     .btn{box-shadow:6px 6px 0 var(--hueso)}
   }
   @media (prefers-reduced-motion:reduce){
@@ -317,18 +329,20 @@
         El resultado no habla de panadería — habla de pertenencia.
       </p>
 
-      <div class="video-marco vertical">
-        <!-- Reemplazar por el archivo real: videos/cyrano.mp4 -->
-        <video controls preload="metadata" poster="assets/cyrano.jpg">
-          <source src="videos/cyrano.mp4" type="video/mp4">
-        </video>
-        <div class="video-pie">Cyrano — El sabor de Quito</div>
-      </div>
+      <div class="cyrano-fila">
+        <div class="video-marco vertical">
+          <!-- Reemplazar por el archivo real: videos/cyrano.mp4 -->
+          <video controls preload="metadata" poster="assets/cyrano.jpg">
+            <source src="videos/cyrano.mp4" type="video/mp4">
+          </video>
+          <div class="video-pie">Cyrano — El sabor de Quito</div>
+        </div>
 
-      <div class="frames v">
-        <img src="assets/hogar.jpg" alt="Fotograma: la iglesia de San Francisco ilustrada con panetones reales como cúpulas">
-        <img src="assets/barrios.jpg" alt="Fotograma: la Virgen del Panecillo sobre un postre real">
-        <img src="assets/sabores.jpg" alt="Fotograma: la Mitad del Mundo coronada con un pan real">
+        <div class="frames v">
+          <img src="assets/hogar.jpg" alt="Fotograma: la iglesia de San Francisco ilustrada con panetones reales como cúpulas">
+          <img src="assets/barrios.jpg" alt="Fotograma: la Virgen del Panecillo sobre un postre real">
+          <img src="assets/sabores.jpg" alt="Fotograma: la Mitad del Mundo coronada con un pan real">
+        </div>
       </div>
     </article>
 
