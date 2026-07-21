@@ -14,11 +14,15 @@
     --noche-2:#1C1914;
     --noche-3:#252118;
     --hueso:#F5F0E4;
-    --hueso-tenue:#B8B0A0;
-    --tenue:#8A8175;
+    --hueso-2:#EAE1CE;
+    --hueso-tenue:#D8D2C4;
+    --tenue:#A9A192;
     --frito:#E8A33D;
-    --maqueno:#6E8F5E;
+    --frito-hondo:#7A520E;
+    --tinta:#4F483C;
+    --tinta-suave:#5C5548;
     --linea:rgba(245,240,228,.13);
+    --linea-clara:rgba(20,18,14,.14);
     --display:'Fraunces',Georgia,serif;
     --texto:'DM Sans',system-ui,sans-serif;
     --max:1180px;
@@ -57,8 +61,8 @@
   }
   .hero::after{
     content:"";position:absolute;inset:0;z-index:-1;
-    background:radial-gradient(900px 500px at 78% 12%,rgba(232,163,61,.13),transparent 62%),
-               radial-gradient(700px 420px at 8% 88%,rgba(110,143,94,.10),transparent 60%);
+    background:radial-gradient(900px 500px at 78% 12%,rgba(232,163,61,.15),transparent 62%),
+               radial-gradient(700px 420px at 8% 88%,rgba(232,163,61,.08),transparent 60%);
   }
   .marca{
     display:flex;align-items:center;gap:14px;
@@ -118,7 +122,7 @@
   .lectura div:last-child{border-radius:0 16px 16px 0}
   .lectura h4{
     font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;
-    color:var(--maqueno);font-weight:700;margin-bottom:14px;
+    color:var(--frito-hondo);font-weight:700;margin-bottom:14px;
   }
   .lectura p{font-size:15.5px;line-height:1.65}
 
@@ -159,7 +163,7 @@
     color:var(--noche-3);line-height:.9;letter-spacing:-.04em;
   }
   .terr .idea{
-    margin-top:18px;padding-left:20px;border-left:2px solid var(--maqueno);
+    margin-top:18px;padding-left:20px;border-left:2px solid var(--frito);
     font-size:15.5px;color:var(--tenue);max-width:62ch;
   }
   .terr .idea b{color:var(--hueso-tenue);font-weight:500}
@@ -182,7 +186,7 @@
     font-size:15px;color:var(--hueso-tenue);padding-left:20px;
     position:relative;margin-bottom:11px;line-height:1.55;
   }
-  .plazo li::before{content:"—";position:absolute;left:0;color:var(--maqueno)}
+  .plazo li::before{content:"—";position:absolute;left:0;color:var(--frito-hondo)}
 
   /* ---------- CREDENCIALES ---------- */
   .creds{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:var(--linea);border-radius:16px;overflow:hidden;margin-top:48px}
@@ -206,6 +210,43 @@
     font-size:12.5px;color:var(--tenue);display:flex;
     justify-content:space-between;flex-wrap:wrap;gap:12px;letter-spacing:.05em;
   }
+
+  /* ---------- SECCIONES CLARAS ----------
+     Hero, cierre y footer quedan oscuros; el contenido va sobre hueso.
+     El amarillo brillante se reserva para paneles oscuros y el boton;
+     sobre claro se usa --frito-hondo, que si tiene contraste legible. */
+  section:not(.cierre){
+    background:var(--hueso);color:var(--noche);
+    border-top:1px solid var(--linea-clara);
+  }
+  section:not(.cierre) p{color:var(--tinta)}
+  section:not(.cierre) strong{color:var(--noche);font-weight:700}
+  section:not(.cierre) em{color:var(--frito-hondo)}
+  section:not(.cierre) .eyebrow{color:var(--frito-hondo)}
+  section:not(.cierre) .nota-contraste{color:var(--tinta-suave)}
+
+  section:not(.cierre) .lectura div{background:var(--hueso-2)}
+  section:not(.cierre) .frames img{border-color:var(--linea-clara)}
+
+  section:not(.cierre) .terr{border-top-color:var(--linea-clara)}
+  section:not(.cierre) .terr .num{color:#DED5C0}
+  section:not(.cierre) .terr .idea{color:var(--tinta-suave)}
+  section:not(.cierre) .terr .idea b{color:var(--noche)}
+
+  section:not(.cierre) .plazo{background:var(--hueso-2);border-color:var(--linea-clara)}
+  section:not(.cierre) .plazo.destacado{
+    border-color:rgba(232,163,61,.55);
+    background:linear-gradient(165deg,rgba(232,163,61,.22),var(--hueso-2) 58%);
+  }
+  section:not(.cierre) .plazo .dur{color:var(--noche)}
+  section:not(.cierre) .plazo.destacado .dur{color:var(--frito-hondo)}
+  section:not(.cierre) .plazo .rol{color:var(--tinta-suave)}
+  section:not(.cierre) .plazo li{color:var(--tinta)}
+
+  section:not(.cierre) .creds{background:var(--linea-clara)}
+  section:not(.cierre) .creds div{background:var(--hueso)}
+  section:not(.cierre) .creds b{color:var(--noche)}
+  section:not(.cierre) .creds span{color:var(--tinta-suave)}
 
   /* ---------- REVEAL ---------- */
   .rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
@@ -234,7 +275,7 @@
 <header class="hero">
   <div class="wrap">
     <div class="marca"><span></span> Splash Labs para Banchis</div>
-    <h1>Nadie recuerda el sabor. Recuerdan <b>dónde estaban</b>.</h1>
+    <h1>Nadie recuerda el sabor. Recuerdan <b>dónde estaban.</b></h1>
     <p class="hero-sub">
       La colación del colegio. La funda comprada en la tienda de la esquina.
       El paquete que se abre antes de que empiece la película. Banchis lleva
@@ -465,7 +506,7 @@
         </ul>
       </div>
     </div>
-    <p style="margin-top:28px;font-size:15px;color:var(--tenue)">
+    <p style="margin-top:28px;font-size:15px;color:var(--tinta-suave)">
       Los alcances y valores de cada ciclo se definen en conversación, según lo que
       Banchis quiera priorizar primero.
     </p>
@@ -488,7 +529,6 @@
       <div><b>Krispy Kreme</b><span>Pieza institucional en exhibición en la región ibérica</span></div>
       <div><b>Cyrano</b><span>Video de marca sobre Quito y memoria colectiva</span></div>
       <div><b>Coca-Cola · Multicines</b><span>Producción y edición para campañas de marca</span></div>
-      <div><b>CT Gaming</b><span>Contenido para la organización de esports de Natanael Cano</span></div>
     </div>
   </div>
 </section>
