@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Splash Labs · Banchis — Propuesta ajustada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,700;9..144,900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --papel:#F6F3EA;
+    --tinta:#0F0D0A;
+    --tinta-2:#3D372D;
+    --frito:#E8A33D;
+    --frito-2:#B87D18;
+    --noche:#14120E;
+    --hueso:#F5F0E4;
+    --hueso-2:#C9C2B2;
+    --verde:#2F7A4E;      /* "en verde, lo que se mantiene" — igual que en el PDF */
+    --verde-2:#DCEBDF;
+    --display:'Fraunces',Georgia,serif;
+    --texto:'DM Sans',system-ui,sans-serif;
+    --max:1100px;
+    --b:2px;
+    --barra:76px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;border-radius:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--papel);color:var(--tinta);
+    font-family:var(--texto);font-size:17px;line-height:1.65;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;
+    padding-bottom:var(--barra);
+  }
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 32px}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+  section{padding:110px 0;background:var(--papel);color:var(--tinta);border-top:var(--b) solid var(--tinta)}
+  section.noche{background:var(--noche);color:var(--hueso);border-top-color:var(--frito)}
+  section.noche p{color:var(--hueso-2)}
+  section.noche strong{color:var(--hueso)}
+
+  .eyebrow{
+    display:inline-block;background:var(--frito);color:var(--tinta);
+    font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;
+    font-weight:700;padding:7px 13px;margin-bottom:26px;border:var(--b) solid var(--tinta);
+  }
+  section.noche .eyebrow{border-color:var(--frito)}
+  h2{
+    font-family:var(--display);font-weight:900;
+    font-size:clamp(32px,5vw,58px);line-height:1.02;letter-spacing:-.035em;margin-bottom:26px;
+    font-variation-settings:'SOFT' 0,'WONK' 1;max-width:16ch;
+  }
+  h3{font-family:var(--display);font-weight:900;font-size:24px;line-height:1.15;letter-spacing:-.02em}
+  p{color:var(--tinta-2);max-width:64ch}
+  p + p{margin-top:16px}
+  strong{color:var(--tinta);font-weight:700}
+  em{font-style:normal;background:var(--frito);color:var(--tinta);padding:0 .18em;font-weight:500}
+  .lead{font-size:clamp(17px,1.9vw,20px);line-height:1.55}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:var(--frito);color:var(--tinta);
+    min-height:92vh;display:flex;flex-direction:column;justify-content:center;
+    padding:110px 0 80px;position:relative;
+  }
+  .marca{
+    display:flex;align-items:center;gap:14px;
+    font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:700;margin-bottom:54px;
+  }
+  .marca span{width:46px;height:3px;background:var(--tinta)}
+  .hero h1{
+    font-family:var(--display);font-weight:900;
+    font-size:clamp(44px,8vw,94px);line-height:1.12;letter-spacing:-.04em;max-width:16ch;
+    font-variation-settings:'SOFT' 0,'WONK' 1;
+  }
+  .hero h1 b{
+    background:var(--tinta);color:var(--frito);font-style:italic;font-weight:900;padding:.02em .14em;
+    -webkit-box-decoration-break:clone;box-decoration-break:clone;
+  }
+  .hero-sub{margin-top:36px;font-size:clamp(17px,2vw,21px);color:var(--tinta-2);max-width:54ch;line-height:1.55}
+  .hero-acciones{display:flex;flex-wrap:wrap;gap:16px;margin-top:46px}
+  .btn{
+    display:inline-flex;align-items:center;gap:12px;
+    background:var(--tinta);color:var(--frito);
+    font-weight:700;font-size:15px;padding:18px 30px;text-decoration:none;
+    letter-spacing:.04em;text-transform:uppercase;
+    border:var(--b) solid var(--tinta);box-shadow:8px 8px 0 var(--papel);
+    transition:transform .15s ease,box-shadow .15s ease;
+  }
+  .btn:hover{transform:translate(4px,4px);box-shadow:4px 4px 0 var(--papel)}
+  .btn.secundario{background:transparent;color:var(--tinta);box-shadow:none}
+  .btn.secundario:hover{transform:none;background:rgba(15,13,10,.08)}
+  .btn svg{width:16px;height:16px;fill:currentColor}
+  .hero-pie{
+    margin-top:66px;padding-top:22px;border-top:var(--b) solid var(--tinta);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
+    font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;
+  }
+  .hero-pie b{display:block;font-weight:400;letter-spacing:0;text-transform:none;font-size:15px;margin-top:4px}
+
+  /* ---------- BEATS (bloques narrados) ----------
+     Cada .beat es un fragmento con su propio clip de voz. Los plegados muestran
+     solo el título y una pista de "abrir"; al abrirse aparece el cuerpo. */
+  .beat{position:relative;scroll-margin-top:44px}
+  .beat + .beat{margin-top:56px}
+  .beat .cuerpo{transition:opacity .5s ease,transform .5s ease}
+  .beat.plegado .cuerpo{display:none}
+  .beat.plegado .cabeza{cursor:pointer}
+  .cabeza{display:flex;align-items:flex-start;justify-content:space-between;gap:22px}
+  .cabeza h3{flex:1}
+  .abrir{
+    flex:none;display:inline-flex;align-items:center;gap:10px;
+    font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;
+    color:var(--tinta);padding:9px 14px;border:var(--b) solid var(--tinta);background:var(--papel);
+    transition:background .15s ease,color .15s ease;white-space:nowrap;
+  }
+  .abrir i{width:14px;height:14px;position:relative;display:inline-block}
+  .abrir i::before,.abrir i::after{content:"";position:absolute;background:currentColor;left:50%;top:50%;transform:translate(-50%,-50%)}
+  .abrir i::before{width:14px;height:2px}
+  .abrir i::after{width:2px;height:14px;transition:transform .2s ease}
+  .beat.plegado .cabeza:hover .abrir,.abrir:hover{background:var(--frito)}
+  .beat:not(.plegado) .abrir{color:var(--tinta-2)}
+  .beat:not(.plegado) .abrir i::after{transform:translate(-50%,-50%) scaleY(0)}
+  .beat:not(.plegado) .abrir .txt-abrir{display:none}
+  .beat.plegado .abrir .txt-oir{display:none}
+  section.noche .abrir{color:var(--frito);border-color:var(--frito);background:var(--noche)}
+  section.noche .beat.plegado .cabeza:hover .abrir,section.noche .abrir:hover{background:var(--frito);color:var(--tinta);border-color:var(--frito)}
+  /* Beat que está sonando ahora mismo */
+  .beat.activo::before{
+    content:"";position:absolute;left:-26px;top:0;bottom:0;width:6px;background:var(--frito);
+    animation:latido 1.6s ease-in-out infinite;
+  }
+  @keyframes latido{0%,100%{opacity:1}50%{opacity:.35}}
+  .cabeza .abrir.sonando{background:var(--frito);color:var(--tinta);border-color:var(--tinta)}
+  .cabeza .abrir.sonando i{display:none}
+  .cabeza .abrir.sonando .txt-oir{display:none}
+  .cabeza .abrir.sonando .txt-sonando{display:inline}
+  .abrir .txt-sonando{display:none}
+  .ondas{display:inline-flex;gap:3px;align-items:flex-end;height:14px}
+  .ondas b{width:3px;background:var(--tinta);animation:onda 1s ease-in-out infinite}
+  .ondas b:nth-child(2){animation-delay:.15s}.ondas b:nth-child(3){animation-delay:.3s}.ondas b:nth-child(4){animation-delay:.45s}
+  @keyframes onda{0%,100%{height:4px}50%{height:14px}}
+
+  /* Elementos que aparecen a medida que la voz los nombra */
+  .cue{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
+  .cue.on{opacity:1;transform:none}
+  .beat.plegado .cue{transition:none}
+
+  /* ---------- 01 tarjetas ---------- */
+  .tarjetas{display:grid;gap:var(--b);background:var(--tinta);border:var(--b) solid var(--tinta);margin-top:54px}
+  .tarjetas .beat{background:var(--papel);padding:34px 34px 38px;margin:0}
+  .tarjetas .beat + .beat{margin-top:0}
+  .tarjetas .beat.activo::before{left:0}
+  .tarjetas .cuerpo{margin-top:22px}
+  .tarjetas p{font-size:16px}
+
+  /* ---------- 02 tabla ---------- */
+  .tabla{margin-top:40px;border:var(--b) solid var(--tinta);background:var(--papel);display:grid}
+  .fila{display:grid;grid-template-columns:1.6fr 1fr 1fr;background:var(--papel);border-top:var(--b) solid var(--tinta)}
+  .fila.cab{border-top:0}
+  .fila > div{padding:18px 22px;display:flex;align-items:center;gap:10px}
+  .fila > div + div{border-left:var(--b) solid var(--tinta);justify-content:center;text-align:center;font-weight:700}
+  .fila.cab{background:var(--tinta);color:var(--hueso)}
+  .fila.cab > div{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;padding:14px 22px}
+  .fila.cab > div + div{border-left-color:var(--hueso-2)}
+  .fila .orig{color:var(--tinta-2);font-weight:500}
+  .fila .opt{background:var(--frito)}
+  .fila.igual .opt{background:var(--verde-2);color:var(--verde)}
+  .fila.igual .opt::after{content:"✓";font-size:14px}
+  .fila .orig s{text-decoration:line-through;text-decoration-thickness:2px;color:var(--tinta-2)}
+  .nota{font-size:14.5px;font-style:italic;margin-top:16px}
+  .nota i{display:inline-block;width:14px;height:14px;background:var(--verde-2);border:var(--b) solid var(--verde);vertical-align:-2px;margin-right:8px}
+
+  .mes{display:grid;grid-template-columns:repeat(3,1fr);border:var(--b) solid var(--tinta);margin-top:34px}
+  .mes > div{background:var(--papel);padding:30px 26px;border-top:var(--b) solid var(--tinta)}
+  .mes > div:first-child{border-top:0}
+  .mes > div + div:not(.destacada){border-left:var(--b) solid var(--tinta)}
+  .mes > .destacada + div{border-left:0}
+  .mes .num{font-family:var(--display);font-weight:900;font-size:60px;line-height:.9;letter-spacing:-.045em;margin-bottom:12px}
+  .mes h4{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;margin-bottom:8px}
+  .mes p{font-size:15px;line-height:1.55}
+  .destacada{grid-column:1 / -1;background:var(--tinta)!important;color:var(--hueso);padding:34px!important;display:grid;grid-template-columns:minmax(200px,250px) 1fr;gap:34px;align-items:center}
+  .destacada .num{color:var(--frito)}
+  .destacada h4{color:var(--frito)}
+  .destacada p{color:var(--hueso-2)}
+  .destacada strong{color:var(--hueso)}
+  .video-marco{background:var(--noche);border:var(--b) solid var(--frito);padding:10px;position:relative}
+  video{width:100%;display:block;background:#000;aspect-ratio:9/16}
+  .video-pie{font-size:11px;color:var(--hueso-2);letter-spacing:.14em;padding:12px 4px 2px;text-align:center;text-transform:uppercase;font-weight:700}
+  .frames{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--b);margin-top:22px}
+  .frames img{width:100%;aspect-ratio:1;object-fit:cover;display:block;border:var(--b) solid var(--frito-2)}
+  .ver-pieza{
+    display:inline-flex;align-items:center;gap:10px;margin-top:22px;
+    background:var(--frito);color:var(--tinta);font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;
+    padding:13px 20px;border:var(--b) solid var(--frito);
+  }
+  .ver-pieza:hover{background:var(--hueso)}
+  .ver-pieza svg{width:14px;height:14px;fill:currentColor}
+
+  /* ---------- 03 noche ---------- */
+  .contraste{
+    display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;margin:48px 0 34px;
+    background:var(--tinta);border:var(--b) solid var(--frito);padding:50px 40px;
+  }
+  .cifra{text-align:center}
+  .cifra b{display:block;font-family:var(--display);font-weight:900;font-size:clamp(52px,8vw,88px);line-height:1;letter-spacing:-.045em}
+  .cifra.si b{color:var(--frito)}
+  .cifra.no b{color:var(--hueso-2)}
+  .cifra small{display:block;margin-top:12px;font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--hueso-2);font-weight:700}
+  .versus{font-family:var(--display);font-style:italic;font-size:20px;color:var(--hueso-2)}
+  .dos-col{display:grid;grid-template-columns:1fr 1fr;gap:var(--b);background:var(--frito);border:var(--b) solid var(--frito);margin-top:56px}
+  .dos-col .beat{background:var(--noche);padding:36px 34px 40px;margin:0}
+  .dos-col .beat + .beat{margin-top:0}
+  .dos-col .beat.activo::before{left:0}
+  .dos-col .cuerpo{margin-top:22px}
+  .lista{list-style:none}
+  .lista li{position:relative;padding:14px 0 14px 38px;border-top:1px solid rgba(201,194,178,.25);font-size:15.5px;color:var(--hueso-2);line-height:1.5}
+  .lista li b{color:var(--hueso);font-weight:700}
+  .lista li::before{position:absolute;left:0;top:13px;width:24px;height:24px;display:grid;place-items:center;font-size:13px;font-weight:700}
+  .lista.si li::before{content:"✓";background:var(--frito);color:var(--tinta)}
+  .lista.no li::before{content:"—";border:var(--b) solid var(--hueso-2);color:var(--hueso-2)}
+  .destino{margin-top:56px;padding-top:46px;border-top:var(--b) solid var(--frito)}
+  .destino h3{font-size:clamp(26px,3.6vw,40px);color:var(--hueso);max-width:20ch}
+  .destino h3 em{background:var(--frito);color:var(--tinta)}
+
+  /* ---------- 04 checks ---------- */
+  .checks{list-style:none;display:grid;grid-template-columns:1fr 1fr;border:var(--b) solid var(--tinta);margin-top:44px}
+  .checks li{border-top:var(--b) solid var(--tinta)}
+  .checks li:nth-child(-n+2){border-top:0}
+  .checks li:nth-child(even){border-left:var(--b) solid var(--tinta)}
+  .checks li{background:var(--papel);padding:28px 26px 28px 66px;position:relative;font-size:15.5px;color:var(--tinta-2);line-height:1.55}
+  .checks li b{display:block;color:var(--tinta);font-family:var(--display);font-size:20px;font-weight:900;letter-spacing:-.02em;margin-bottom:6px}
+  .checks li::before{content:"✓";position:absolute;left:24px;top:30px;width:26px;height:26px;display:grid;place-items:center;background:var(--frito);color:var(--tinta);font-weight:700;font-size:14px;border:var(--b) solid var(--tinta)}
+  .caja{background:var(--frito);border:var(--b) solid var(--tinta);padding:40px 38px;margin-top:0}
+  .caja h3{margin-bottom:14px}
+  .caja p{color:var(--tinta)}
+  .caja .remate{font-family:var(--display);font-weight:900;font-size:clamp(22px,2.8vw,30px);letter-spacing:-.025em;margin-top:26px;color:var(--tinta);max-width:none;line-height:1.15}
+
+  /* ---------- 05 inversión ---------- */
+  .precio{background:var(--tinta);color:var(--hueso);border:var(--b) solid var(--tinta);padding:56px 44px;margin-top:40px;display:grid;grid-template-columns:auto 1fr;gap:44px;align-items:center}
+  .precio .monto{font-family:var(--display);font-weight:900;font-size:clamp(64px,10vw,120px);line-height:.9;letter-spacing:-.05em;color:var(--frito)}
+  .precio .monto small{display:block;font-family:var(--texto);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--hueso-2);font-weight:700;margin-top:16px}
+  .precio .total{font-family:var(--display);font-size:24px;font-weight:700;color:var(--hueso);letter-spacing:-.02em;margin-bottom:14px}
+  .precio p{color:var(--hueso-2);font-size:16px}
+  .cuenta{display:grid;grid-template-columns:1fr 1fr;border:var(--b) solid var(--tinta)}
+  .cuenta > div{background:var(--papel);padding:34px 32px}
+  .cuenta > div + div{border-left:var(--b) solid var(--tinta)}
+  .cuenta h4{font-family:var(--display);font-weight:900;font-size:22px;letter-spacing:-.02em;margin-bottom:6px}
+  .cuenta .tag{display:inline-block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;padding:5px 10px;border:var(--b) solid var(--tinta);margin-bottom:18px}
+  .cuenta p{font-size:15.5px}
+  .condiciones{list-style:none;border-top:var(--b) solid var(--tinta)}
+  .condiciones li{display:grid;grid-template-columns:200px 1fr;gap:26px;padding:24px 0;border-bottom:var(--b) solid var(--tinta);font-size:16px;color:var(--tinta-2)}
+  .condiciones li b{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--tinta);padding-top:4px}
+  .condiciones li strong{color:var(--tinta)}
+
+  /* ---------- 06 cierre ---------- */
+  .cierre{padding:120px 0 80px}
+  .cierre .remate{font-family:var(--display);font-weight:900;font-size:clamp(30px,4.6vw,54px);line-height:1.05;letter-spacing:-.035em;color:var(--hueso);max-width:20ch;margin:44px 0 26px}
+  .cierre .remate em{background:var(--frito);color:var(--tinta)}
+  .cierre .acciones{display:flex;flex-wrap:wrap;gap:16px;margin-top:44px;align-items:center}
+  .cierre .btn{background:var(--frito);color:var(--tinta);border-color:var(--hueso);box-shadow:8px 8px 0 var(--hueso)}
+  .cierre .btn:hover{box-shadow:4px 4px 0 var(--hueso)}
+  .enlace{color:var(--hueso);font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border-bottom:var(--b) solid var(--frito);padding-bottom:3px}
+  .enlace:hover{color:var(--frito)}
+  .firma{margin-top:70px;padding-top:26px;border-top:var(--b) solid var(--frito);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--hueso-2)}
+  .firma b{color:var(--hueso)}
+  footer{background:var(--tinta);color:var(--hueso-2);border-top:var(--b) solid var(--frito);padding:30px 0;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+  /* ---------- BARRA DE NARRACIÓN ---------- */
+  #barra{
+    position:fixed;left:0;right:0;bottom:0;height:var(--barra);z-index:50;
+    background:var(--tinta);color:var(--hueso);border-top:var(--b) solid var(--frito);
+    transform:translateY(100%);transition:transform .35s ease;
+  }
+  #barra.visible{transform:none}
+  #barra .progreso{position:absolute;left:0;top:calc(-1 * var(--b));height:var(--b);background:var(--hueso);width:0;transition:width .3s linear}
+  #barra .wrap{height:100%;display:grid;grid-template-columns:auto auto 1fr auto auto;gap:14px;align-items:center}
+  .ctl{width:46px;height:46px;display:grid;place-items:center;border:var(--b) solid var(--hueso-2);color:var(--hueso);transition:background .15s ease,color .15s ease}
+  .ctl:hover{background:var(--hueso);color:var(--tinta)}
+  .ctl svg{width:18px;height:18px;fill:currentColor}
+  .ctl.principal{background:var(--frito);color:var(--tinta);border-color:var(--frito);width:auto;padding:0 18px;gap:10px;grid-auto-flow:column;font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+  .ctl.principal:hover{background:var(--hueso)}
+  .ctl.principal .ico-pausa{display:none}
+  #barra.sonando .ctl.principal .ico-play{display:none}
+  #barra.sonando .ctl.principal .ico-pausa{display:block}
+  #barra.espera .ctl.principal{animation:latido 1.4s ease-in-out infinite}
+  .flechas{display:flex;gap:var(--b)}
+  .estado{min-width:0;line-height:1.3}
+  .estado b{display:block;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--frito);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .estado span{display:block;font-size:14.5px;color:var(--hueso);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ctl.silencio .ico-on{display:none}
+  .ctl:not(.silencio) .ico-off{display:none}
+
+  /* ---------- REVEAL GENERAL ---------- */
+  .rv{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+  .rv.on{opacity:1;transform:none}
+
+  @media (max-width:860px){
+    .wrap{padding:0 20px}
+    section{padding:78px 0}
+    .hero{padding:96px 0 64px;min-height:auto}
+    .beat.activo::before{left:-12px;width:4px}
+    .tarjetas .beat{padding:28px 22px 30px}
+    .cabeza{flex-direction:column;gap:14px}
+    .abrir{align-self:flex-start}
+    .fila{grid-template-columns:1.3fr 1fr 1fr}
+    .fila > div{padding:14px 12px;font-size:14.5px}
+    .mes{grid-template-columns:1fr}
+    .destacada{grid-template-columns:1fr}
+    .destacada .video-marco{max-width:300px;margin:0 auto}
+    .contraste{grid-template-columns:1fr;gap:22px;padding:36px 22px}
+    .dos-col{grid-template-columns:1fr}
+    .dos-col .beat{padding:28px 22px 32px}
+    .checks{grid-template-columns:1fr}
+    .checks li{border-left:0!important;border-top:var(--b) solid var(--tinta)!important}
+    .checks li:first-child{border-top:0!important}
+    .mes > div + div{border-left:0!important;border-top:var(--b) solid var(--tinta)!important}
+    .cuenta > div + div{border-left:0;border-top:var(--b) solid var(--tinta)}
+    .precio{grid-template-columns:1fr;gap:26px;padding:40px 26px}
+    .cuenta{grid-template-columns:1fr}
+    .condiciones li{grid-template-columns:1fr;gap:8px}
+    .caja{padding:30px 22px}
+    #barra .wrap{grid-template-columns:auto auto 1fr auto;gap:10px}
+    #barra .ctl.cerrar{display:none}
+    .ctl.principal{padding:0 12px}
+    .ctl.principal .txt{display:none}
+    .btn{box-shadow:6px 6px 0 var(--papel)}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+    .rv,.cue{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<header class="hero beat" id="inicio" data-clip="hero">
+  <div class="wrap">
+    <div class="marca"><span></span> Splash Labs · Propuesta ajustada</div>
+    <h1>Menos volumen. <b>El mismo camino, a otro ritmo.</b></h1>
+    <p class="hero-sub">
+      Una versión ajustada del plan: mismas bases, misma calidad, menos producción mensual.
+    </p>
+    <div class="hero-acciones">
+      <button class="btn" id="btn-recorrido" type="button">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        Ver la propuesta narrada
+      </button>
+      <a class="btn secundario" href="#s1" id="btn-libre">Explorar a mi ritmo ↓</a>
+    </div>
+    <div class="hero-pie">
+      <span>Preparado para <b>Francisco · Banchis Food S.A.</b></span>
+      <span>Septiembre 2026</span>
+      <span>Reemplaza la propuesta anterior</span>
+    </div>
+  </div>
+</header>
+
+<!-- ============ 01 · LO QUE AJUSTAMOS ============ -->
+<section id="s1" data-cap="01 · Lo que ajustamos">
+  <div class="wrap">
+    <div class="beat" data-clip="s1a">
+      <div class="cabeza">
+        <div>
+          <div class="eyebrow">01 · Lo que ajustamos</div>
+          <h2>Qué se puede recortar y qué cuesta</h2>
+        </div>
+        <button class="abrir" type="button"><span class="txt-oir">Escuchar</span><span class="txt-sonando"><span class="ondas"><b></b><b></b><b></b><b></b></span> Narrando</span></button>
+      </div>
+      <div class="cuerpo">
+        <p class="lead">
+          Nos pidió una versión que optimice recursos y tiempos, entendiendo que tal vez no se
+          llegue al 100% pero sí a un punto alto. Trabajamos con ese criterio y le contamos con
+          claridad qué se gana y qué se resigna.
+        </p>
+      </div>
+    </div>
+
+    <div class="tarjetas">
+      <article class="beat plegado" data-clip="s1b">
+        <div class="cabeza">
+          <h3>La conclusión fue clara</h3>
+          <button class="abrir" type="button"><i></i><span class="txt-abrir">Abrir</span><span class="txt-oir">Escuchar</span><span class="txt-sonando"><span class="ondas"><b></b><b></b><b></b><b></b></span> Narrando</span></button>
+        </div>
+        <div class="cuerpo">
+          <p>Hay <strong>una sola cosa que se puede reducir sin dañar el resultado</strong>, y es la
+          cantidad de piezas que publicamos cada semana. Todo lo demás —la estrategia, la calidad de
+          producción, las plataformas, el orden de las etapas— es lo que hace que el plan funcione.</p>
+        </div>
+      </article>
+
+      <article class="beat plegado" data-clip="s1c">
+        <div class="cabeza">
+          <h3>Cómo lo resolvimos</h3>
+          <button class="abrir" type="button"><i></i><span class="txt-abrir">Abrir</span><span class="txt-oir">Escuchar</span><span class="txt-sonando"><span class="ondas"><b></b><b></b><b></b><b></b></span> Narrando</span></button>
+        </div>
+        <div class="cuerpo">
+          <p>Concentramos la producción en <strong>dos jornadas de grabación al mes</strong>. En cada
+          salida se graba la pieza destacada, los videos del período y el material de apoyo que después
+          alimenta las ediciones y los diseños.</p>
+          <p>Eso significa menos movilizaciones, menos tiempos muertos y más aprovechamiento de cada
+          salida. Es exactamente la optimización que nos pidió: <em>el mismo trabajo, mejor organizado.</em></p>
+        </div>
+      </article>
+
+      <article class="beat plegado" data-clip="s1d">
+        <div class="cabeza">
+          <h3>Bajamos la cantidad. No bajamos el estándar.</h3>
+          <button class="abrir" type="button"><i></i><span class="txt-abrir">Abrir</span><span class="txt-oir">Escuchar</span><span class="txt-sonando"><span class="ondas"><b></b><b></b><b></b><b></b></span> Narrando</span></button>
+        </div>
+        <div class="cuerpo">
+          <p>La pieza destacada del mes se mantiene igual, las tres plataformas siguen activas y la
+          estrategia no cambia. Lo que sí cambia es el ritmo — y eso tiene una consecuencia real que
+          <strong>preferimos decirle antes de empezar, no después.</strong></p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 · LAS DOS VERSIONES ============ -->
+<section id="s2" data-cap="02 · Las dos versiones">
+  <div class="wrap">
+    <div class="beat" data-clip="s2a">
+      <div class="cabeza">
+        <div>
+          <div class="eyebrow">02 · Las dos versiones</div>
+          <h2>Qué cambia, en concreto</h2>
+        </div>
+        <button class="abrir" type="button"><span class="txt-oir">Escuchar</span><span class="txt-sonando"><span class="ondas"><b></b><b></b><b></b><b></b></span> Narrando</span></button>
+      </div>
+      <div class="cuerpo"></div>
+    </div>
+
+    <div class="beat plegado" data-clip="s2b">
+      <div class="cabeza">
+        <h3>Plan original frente a plan optimizado</h3>
+        <button class="abrir" type="button"><i></i><span class="txt-abrir">Ver comparación</span><span class="txt-oir">Escuchar</span><span class="txt-sonando"><span class="ondas"><b></b><b></b><b></b><b></b></span> Narrando</span></button>
+      </div>
+      <div class="cuerpo">
+        <div class="tabla" role="table" aria-label="Comparación entre plan original y plan optimizado">
+          <div class="fila cab" role="row"><div></div><div>Plan original</div><div>Plan optimizado</div></div>
+          <div class="fila cue" role="row"><div>Inversión mensual</div><div class="orig">$3.900</div><div class="opt">$3.200</div></div>
+          <div class="fila cue" role="row"><div>Piezas por semana</div><div class="orig">5</div><div class="opt">3</div></div>
+          <div class="fila cue" role="row"><div>Piezas al mes</div><div class="orig">20</div><div class="opt">12</div></div>
+          <div class="fila cue" role="row"><div>Jornadas de grabación</div><div class="orig">Mensuales</div><div class="opt">2 al mes</div></div>
+          <div class="fila cue igual" role="row"><div>Pieza destacada del mes</div><div class="orig">1</div><div class="opt">1</div></div>
+          <div class="fila cue igual" role="row"><div>Plataformas activas</div><div class="orig">3</div><div class="opt">3</div></div>
+          <div class="fila cue igual" role="row"><div>Estrategia y dirección</div><div class="orig">Incluida</div><div class="opt">Incluida</div></div>
+          <div class="fila cue igual" role="row"><div>Reporte mensual</div><div class="orig">Incluido</div><div class="opt">Incluido</div></div>
+        </div>
+        <p class="nota cue"><i></i>En verde, lo que se mantiene sin cambios entre una versión y otra.</p>
+      </div>
+    </div>
+
+    <div class="beat plegado" data-clip="s2c">
+      <div class="cabeza">
+        <h3>Qué produce un mes del plan optimizado</h3>
+        <button class="abrir" type="button"><i></i><span class="txt-abrir">Ver el mes</span><span class="txt-oir">Escuchar</span><span class="txt-sonando"><span class="ondas"><b></b><b></b><b></b><b></b></span> Narrando</span></button>
+      </div>
+      <div class="cuerpo">
+        <p>La mezcla puede ajustarse según lo que necesite cada etapa, manteniendo el volumen mensual.</p>
+        <div class="mes">
+          <div class="destacada cue" id="tile-destacada">
+            <div class="video-marco">
+              <video id="cyrano" controls playsinline preload="metadata" poster="../assets/cyrano.jpg">
+                <source src="../videos/cyrano.mp4" type="video/mp4">
+              </video>
+              <div class="video-pie">Cyrano — El sabor de Quito</div>
+            </div>
+            <div>
+              <div class="num">1</div>
+              <h4>Pieza destacada</h4>
+              <p>La de mayor producción, <strong>el momento fuerte del mes</strong>. Es el tipo de video que
+              puede ver aquí mismo: producto real dentro de una ciudad dibujada a línea, hecho para Cyrano.</p>
+              <button class="ver-pieza" type="button" id="btn-ver-pieza">
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Ver la pieza destacada
+              </button>
+              <div class="frames">
+                <img src="../assets/hogar.jpg" alt="Fotograma: la iglesia de San Francisco ilustrada con panetones reales como cúpulas">
+                <img src="../assets/barrios.jpg" alt="Fotograma: la Virgen del Panecillo sobre un postre real">
+                <img src="../assets/sabores.jpg" alt="Fotograma: la Mitad del Mundo coronada con un pan real">
+              </div>
+            </div>
+          </div>
+          <div class="cue"><div class="num">8</div><h4>Videos producidos</h4><p>Grabados y editados para redes.</p></div>
+          <div class="cue"><div class="num">3</div><h4>Piezas de diseño</h4><p>Carruseles y gráficas.</p></div>
+          <div class="cue"><div class="num">2</div><h4>Jornadas de grabación</h4><p>Incluido el material de apoyo.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 · QUÉ ESPERAR ============ -->
+<section id="s3" class="noche" data-cap="03 · Qué esperar">
+  <div class="wrap">
+    <div class="beat" data-clip="s3a">
+      <div class="cabeza">
+        <div>
+          <div class="eyebrow">03 · Qué esperar</div>
+          <h2>Menos producción significa un avance más pausado</h2>
+        </div>
+        <button class="abrir" type="button"><span class="txt-oir">Escuchar</span><span class="txt-sonando"><span class="ondas"><b></b><b></b><b></b><b></b></span> Narrando</span></button>
+      </div>
+      <div class="cuerpo">
+        <p class="lead">Esta es la parte que preferimos decirle de frente: <strong>doce piezas al mes no
+        producen el mismo resultado que veinte.</strong> Ni en la misma velocidad, ni en el mismo alcance.</p>
+        <div class="contraste">
+          <div class="cifra no"><b>20</b><small>Piezas al mes · plan original</small></div>
+          <div class="versus">frente a</div>
+          <div class="cifra si"><b>12</b><small>Piezas al mes · plan optimizado</small></div>
+        </div>
+        <p>El plan optimizado produce alrededor del <strong>60% del volumen</strong> del plan completo. Eso no
+        significa 60% del resultado —porque la estrategia, la calidad y el criterio se mantienen intactos—
+        pero sí significa que en ocho meses la marca no llegará exactamente al mismo punto.</p>
+      </div>
+    </div>
+
+    <div class="dos-col">
+      <article class="beat plegado" data-clip="s3b">
+        <div class="cabeza">
+          <h3>Lo que sí se logra en los ocho meses</h3>
+          <button class="abrir" type="button"><i></i><span class="txt-abrir">Abrir</span><span class="txt-oir">Escuchar</span><span class="txt-sonando"><span class="ondas"><b></b><b></b><b></b><b></b></span> Narrando</span></button>
+        </div>
+        <div class="cuerpo">
+          <ul class="lista si">
+            <li class="cue"><b>Una identidad visual propia</b> y reconocible para Banchis</li>
+            <li class="cue"><b>Presencia constante y ordenada</b> en las tres plataformas</li>
+            <li class="cue"><b>Las cuatro etapas</b> recorridas completas</li>
+            <li class="cue"><b>El trabajo de atribución iniciado:</b> que la gente conecte las líneas con la marca</li>
+            <li class="cue"><b>Un archivo propio de contenido</b> y datos reales sobre qué funciona</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="beat plegado" data-clip="s3c">
+        <div class="cabeza">
+          <h3>Lo que toma más tiempo</h3>
+          <button class="abrir" type="button"><i></i><span class="txt-abrir">Abrir</span><span class="txt-oir">Escuchar</span><span class="txt-sonando"><span class="ondas"><b></b><b></b><b></b><b></b></span> Narrando</span></button>
+        </div>
+        <div class="cuerpo">
+          <ul class="lista no">
+            <li class="cue"><b>El alcance masivo</b> — menos publicaciones significan menos oportunidades de llegar a gente nueva</li>
+            <li class="cue"><b>El tamaño de la comunidad</b> — crece, pero más lento</li>
+            <li class="cue"><b>La saturación del mensaje</b> — que la asociación entre Banchis y sus productos quede instalada en la cabeza del consumidor necesita repetición, y la repetición necesita volumen</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+
+    <div class="beat plegado destino" data-clip="s3d">
+      <div class="cabeza">
+        <h3>Se llega al mismo lugar. <em>Toma más tiempo llegar.</em></h3>
+        <button class="abrir" type="button"><i></i><span class="txt-abrir">Abrir</span><span class="txt-oir">Escuchar</span><span class="txt-sonando"><span class="ondas"><b></b><b></b><b></b><b></b></span> Narrando</span></button>
+      </div>
+      <div class="cuerpo" style="margin-top:22px">
+        <p>Si al cierre de los ocho meses quiere alcanzar el punto que plantea el plan completo, hay dos
+        caminos: <strong>subir el ritmo en algún tramo del ciclo</strong>, o <strong>extender el plan unos meses
+        más</strong>. Lo evaluamos juntos con datos reales en la revisión del mes 4.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 · LO QUE NO CAMBIA ============ -->
+<section id="s4" data-cap="04 · Lo que no cambia">
+  <div class="wrap">
+    <div class="beat" data-clip="s4a">
+      <div class="cabeza">
+        <div>
+          <div class="eyebrow">04 · Lo que no cambia</div>
+          <h2>El plan sigue siendo el mismo plan</h2>
+        </div>
+        <button class="abrir" type="button"><span class="txt-oir">Escuchar</span><span class="txt-sonando"><span class="ondas"><b></b><b></b><b></b><b></b></span> Narrando</span></button>
+      </div>
+      <div class="cuerpo">
+        <p class="lead">El ritmo baja, pero el servicio no. <strong>Todo lo que hace que el plan funcione se
+        mantiene sin recortes.</strong></p>
+      </div>
+    </div>
+
+    <div class="beat plegado" data-clip="s4b">
+      <div class="cabeza">
+        <h3>Siete cosas que siguen exactamente igual</h3>
+        <button class="abrir" type="button"><i></i><span class="txt-abrir">Ver las siete</span><span class="txt-oir">Escuchar</span><span class="txt-sonando"><span class="ondas"><b></b><b></b><b></b><b></b></span> Narrando</span></button>
+      </div>
+      <div class="cuerpo">
+        <ul class="checks">
+          <li class="cue"><b>Las cuatro etapas y su orden</b> Que te vean bien, que sepan todo lo que eres, que los nuevos también la recuerden, que sepan por qué no hay otro igual.</li>
+          <li class="cue"><b>El equipo completo</b> Dirección creativa y estrategia, producción audiovisual, edición y diseño trabajando sobre Banchis todos los meses.</li>
+          <li class="cue"><b>La calidad de producción</b> Mismo estándar, mismo criterio, mismo nivel de acabado en cada pieza.</li>
+          <li class="cue"><b>Instagram, Facebook y TikTok</b> Las tres plataformas activas, con el contenido adaptado al lenguaje de cada una.</li>
+          <li class="cue"><b>Publicación y programación</b> El contenido sale publicado desde nuestro lado, con calendario acordado.</li>
+          <li class="cue"><b>Sistema de respuesta automática</b> Para que ninguna consulta quede sin contestar.</li>
+          <li class="cue"><b>Reporte mensual</b> Qué se publicó, qué funcionó y qué se ajusta para el mes siguiente.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="beat plegado caja" data-clip="s4c">
+      <div class="cabeza">
+        <h3>Todo lo que una idea necesita, incluido</h3>
+        <button class="abrir" type="button"><i></i><span class="txt-abrir">Abrir</span><span class="txt-oir">Escuchar</span><span class="txt-sonando"><span class="ondas"><b></b><b></b><b></b><b></b></span> Narrando</span></button>
+      </div>
+      <div class="cuerpo" style="margin-top:18px">
+        <p>Si una pieza requiere salir a grabar a la calle, movilización del equipo o una persona frente a
+        cámara, eso sigue estando considerado dentro del valor mensual. <strong>No aparecen costos sorpresa</strong>
+        por producir lo que está planificado.</p>
+        <p class="remate">Menos piezas al mes. La misma marca detrás de cada una.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 · INVERSIÓN ============ -->
+<section id="s5" data-cap="05 · Inversión">
+  <div class="wrap">
+    <div class="beat" data-clip="s5a">
+      <div class="cabeza">
+        <div>
+          <div class="eyebrow">05 · Inversión</div>
+          <h2>Lo que cuesta y cómo funciona</h2>
+        </div>
+        <button class="abrir" type="button"><span class="txt-oir">Escuchar</span><span class="txt-sonando"><span class="ondas"><b></b><b></b><b></b><b></b></span> Narrando</span></button>
+      </div>
+      <div class="cuerpo">
+        <div class="precio">
+          <div class="monto">$3.200<small>por mes · no incluye IVA</small></div>
+          <div>
+            <div class="total">Plan de 8 meses · Inversión total $25.600</div>
+            <p>Cubre el equipo completo trabajando de forma continua en Instagram, Facebook y TikTok, con las
+            cuatro etapas del plan y el reporte mensual de resultados.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="beat plegado" data-clip="s5b">
+      <div class="cabeza">
+        <h3>Lo que corre por cuenta de Banchis</h3>
+        <button class="abrir" type="button"><i></i><span class="txt-abrir">Abrir</span><span class="txt-oir">Escuchar</span><span class="txt-sonando"><span class="ondas"><b></b><b></b><b></b><b></b></span> Narrando</span></button>
+      </div>
+      <div class="cuerpo" style="margin-top:24px">
+        <div class="cuenta">
+          <div class="cue">
+            <span class="tag">Opcional y flexible</span>
+            <h4>Inversión en pauta</h4>
+            <p>Se ejecuta desde la cuenta de Banchis, con nuestra gestión. Puede activarse desde el primer mes
+            o esperar al mes 3, cuando ya sabemos qué contenido funciona. No hace falta invertir cientos de
+            dólares: <strong>con montos pequeños y bien dirigidos ya se ven resultados</strong>, y se ajusta sobre la marcha.</p>
+          </div>
+          <div class="cue">
+            <span class="tag">No es obligatoria</span>
+            <h4>Licencia de la herramienta de automatización</h4>
+            <p>Sirve para responder automáticamente las consultas repetidas: dónde conseguir el producto, qué
+            líneas son de Banchis. Cuesta entre <strong>$30 y $50 mensuales</strong>, pero si esa información la
+            incluimos dentro de los videos y en las descripciones, este elemento se puede omitir por completo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="beat plegado" data-clip="s5c">
+      <div class="cabeza">
+        <h3>Condiciones</h3>
+        <button class="abrir" type="button"><i></i><span class="txt-abrir">Abrir</span><span class="txt-oir">Escuchar</span><span class="txt-sonando"><span class="ondas"><b></b><b></b><b></b><b></b></span> Narrando</span></button>
+      </div>
+      <div class="cuerpo" style="margin-top:24px">
+        <ul class="condiciones">
+          <li class="cue"><b>Facturación</b><span>Mensual: <strong>50% al inicio de cada mes y 50% al cierre</strong> del mismo.</span></li>
+          <li class="cue"><b>Revisión</b><span>Revisión formal de resultados al <strong>cierre del mes 4</strong>, para evaluar avances y ajustar el plan de los siguientes cuatro.</span></li>
+          <li class="cue"><b>Validez</b><span>Esta propuesta tiene una validez de <strong>15 días</strong>.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="beat plegado" data-clip="s5d">
+      <div class="cabeza">
+        <h3>Si en algún momento quiere subir el ritmo</h3>
+        <button class="abrir" type="button"><i></i><span class="txt-abrir">Abrir</span><span class="txt-oir">Escuchar</span><span class="txt-sonando"><span class="ondas"><b></b><b></b><b></b><b></b></span> Narrando</span></button>
+      </div>
+      <div class="cuerpo" style="margin-top:18px">
+        <p>El plan puede ampliarse a mayor volumen de publicación <strong>en cualquier momento del ciclo, sin
+        reiniciar nada</strong>. También se pueden sumar producciones especiales —una pieza institucional mayor o
+        una campaña puntual— cotizadas aparte con valor preferencial por ser marca acompañada.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 · SIGUIENTE PASO ============ -->
+<section id="s6" class="noche cierre" data-cap="06 · Siguiente paso">
+  <div class="wrap">
+    <div class="beat" data-clip="s6a">
+      <div class="cabeza">
+        <div>
+          <div class="eyebrow">06 · Siguiente paso</div>
+          <h2>Listos para arrancar</h2>
+        </div>
+        <button class="abrir" type="button"><span class="txt-oir">Escuchar</span><span class="txt-sonando"><span class="ondas"><b></b><b></b><b></b><b></b></span> Narrando</span></button>
+      </div>
+      <div class="cuerpo">
+        <p class="lead">Ajustamos el plan a lo que nos pidió sin tocar lo que hace que funcione. Entra sin problema
+        en el esquema de Banchis y construye las mismas bases, con un avance más pausado.</p>
+        <p>Todo lo demás —el diagnóstico, las cuatro etapas, los pilares de contenido y el detalle del plan— sigue
+        tal como está en el documento anterior. <strong>Este reemplaza únicamente la parte de alcance e inversión.</strong></p>
+        <p class="remate">Banchis ya ganó la percha, la calle y al distribuidor. <em>Falta ganar la pantalla.</em></p>
+        <p>Quedamos atentos a su respuesta y a coordinar una reunión para conversar cómo avanzamos.</p>
+        <div class="acciones">
+          <a class="btn" href="https://wa.me/593984712418?text=Hola%20Fabi%C3%A1n%2C%20revis%C3%A9%20la%20propuesta%20ajustada%20para%20Banchis%20y%20me%20gustar%C3%ADa%20coordinar%20una%20reuni%C3%B3n." target="_blank" rel="noreferrer">Coordinar una reunión</a>
+          <a class="enlace" href="../">Ver el documento anterior →</a>
+        </div>
+        <div class="firma">
+          <span><b>Splash Labs</b> · Estrategia, producción y dirección creativa bajo el mismo techo.</span>
+          <span>Propuesta ajustada · Septiembre 2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Splash Labs · Quito, Ecuador</span>
+    <span>Documento preparado para Banchis Food S.A. · Confidencial</span>
+  </div>
+</footer>
+
+<!-- ============ BARRA DE NARRACIÓN ============ -->
+<div id="barra" aria-live="polite">
+  <div class="progreso"></div>
+  <div class="wrap">
+    <button class="ctl principal" id="ctl-play" type="button" aria-label="Reproducir o pausar la narración">
+      <svg class="ico-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      <svg class="ico-pausa" viewBox="0 0 24 24"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
+      <span class="txt">Reproducir</span>
+    </button>
+    <div class="flechas">
+      <button class="ctl" id="ctl-prev" type="button" aria-label="Fragmento anterior"><svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg></button>
+      <button class="ctl" id="ctl-next" type="button" aria-label="Fragmento siguiente"><svg viewBox="0 0 24 24"><path d="M16 6h2v12h-2zM6 18l8.5-6L6 6z"/></svg></button>
+    </div>
+    <div class="estado"><b id="est-cap">Propuesta narrada</b><span id="est-txt">Pulse reproducir para comenzar</span></div>
+    <button class="ctl" id="ctl-mute" type="button" aria-label="Silenciar o activar la voz">
+      <svg class="ico-on" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9zm13.5 3A4.5 4.5 0 0 0 14 8v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg>
+      <svg class="ico-off" viewBox="0 0 24 24"><path d="M16.5 12A4.5 4.5 0 0 0 14 8v2.2l2.5 2.5zM19 12a7 7 0 0 1-1.3 4l1.5 1.5A9 9 0 0 0 21 12a9 9 0 0 0-7-8.8v2.1A7 7 0 0 1 19 12zM4.3 3 3 4.3 7.7 9H3v6h4l5 5v-6.7l4.3 4.3a7 7 0 0 1-2.3 1.3v2.1a9 9 0 0 0 3.7-1.9L19.7 21l1.3-1.3zM12 4 9.9 6.1 12 8.2z"/></svg>
+    </button>
+    <button class="ctl cerrar" id="ctl-cerrar" type="button" aria-label="Cerrar la narración"><svg viewBox="0 0 24 24"><path d="M18.3 5.7 12 12l6.3 6.3-1.4 1.4L10.6 13.4 4.3 19.7 2.9 18.3 9.2 12 2.9 5.7l1.4-1.4 6.3 6.3 6.3-6.3z"/></svg></button>
+  </div>
+</div>
+
+<audio id="voz" preload="auto"></audio>
+
+<script>
+(() => {
+  /* Cada clip = un archivo en audio/. `cues` son los segundos (medidos sobre la voz real)
+     en que aparece cada .cue del beat. `dur` es aproximado, solo para la barra de progreso.
+     `hold`: al terminar, el recorrido se detiene para que el prospecto vea el video. */
+  const CLIPS = [
+    {id:'hero', dur:26},
+    {id:'s1a', dur:22}, {id:'s1b', dur:20}, {id:'s1c', dur:30}, {id:'s1d', dur:21},
+    {id:'s2a', dur:6},
+    {id:'s2b', dur:43, cues:[3.74, 9.76, 13.71, 17.46, 22.31, 26.74, 30.76, 34.14, 37.17]},
+    {id:'s2c', dur:34, cues:[10.01, 19.41, 24.25, 28.48], hold:true},
+    {id:'s3a', dur:41},
+    {id:'s3b', dur:26, cues:[3.28, 7.69, 12.05, 15.45, 21.22]},
+    {id:'s3c', dur:26, cues:[2.48, 9.54, 14.12]},
+    {id:'s3d', dur:23},
+    {id:'s4a', dur:15},
+    {id:'s4b', dur:56, cues:[0.1, 10.27, 20.37, 27.66, 36.2, 43.48, 49.48]},
+    {id:'s4c', dur:26},
+    {id:'s5a', dur:27},
+    {id:'s5b', dur:53, cues:[3.14, 27.58]},
+    {id:'s5c', dur:22, cues:[2.0, 9.38, 17.53]},
+    {id:'s5d', dur:22},
+    {id:'s6a', dur:54},
+  ];
+  const TOTAL = CLIPS.reduce((a,c)=>a+c.dur,0);
+  const menosMovimiento = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const $ = s => document.querySelector(s);
+  const voz = $('#voz');
+  const barra = $('#barra');
+  const btnPlay = $('#ctl-play'), txtPlay = btnPlay.querySelector('.txt');
+  const estCap = $('#est-cap'), estTxt = $('#est-txt'), progreso = barra.querySelector('.progreso');
+  const video = $('#cyrano');
+
+  CLIPS.forEach((c,i) => {
+    c.i = i;
+    c.el = document.querySelector(`[data-clip="${c.id}"]`);
+    c.cueEls = [...c.el.querySelectorAll('.cue')];
+    c.titulo = (c.el.querySelector('h3') || c.el.querySelector('h2') || c.el.querySelector('h1')).textContent.replace(/\s+/g,' ').trim();
+    c.cap = c.el.closest('section')?.dataset.cap || 'Portada';
+  });
+  const porId = Object.fromEntries(CLIPS.map(c=>[c.id,c]));
+
+  /* Estado del reproductor */
+  const T = { i:-1, recorrido:false, hold:false, reanudarTrasVideo:false };
+
+  /* ---- helpers de UI ---- */
+  const abrirBeat = (c, todo) => {
+    c.el.classList.remove('plegado');
+    if(todo){
+      c.cueEls.forEach((el,k)=>{ setTimeout(()=>el.classList.add('on'), menosMovimiento?0:k*110); });
+    }
+  };
+  const marcarActivo = c => {
+    document.querySelectorAll('.beat.activo').forEach(el=>el.classList.remove('activo'));
+    document.querySelectorAll('.abrir.sonando').forEach(el=>el.classList.remove('sonando'));
+    if(c){ c.el.classList.add('activo'); c.el.querySelector('.abrir')?.classList.add('sonando'); }
+  };
+  const irA = c => {
+    if(c.id==='hero'){ scrollTo({top:0,behavior:menosMovimiento?'auto':'smooth'}); return; }
+    c.el.scrollIntoView({behavior:menosMovimiento?'auto':'smooth', block:'start'});
+  };
+  const pintarBarra = () => {
+    const c = CLIPS[T.i];
+    barra.classList.toggle('sonando', !voz.paused && !voz.ended);
+    barra.classList.toggle('espera', T.hold);
+    if(T.hold){ txtPlay.textContent = 'Continuar'; }
+    else if(!voz.paused){ txtPlay.textContent = 'Pausar'; }
+    else if(T.i>=0 && voz.ended && !T.recorrido){ txtPlay.textContent = 'Seguir'; }
+    else { txtPlay.textContent = T.i<0 ? 'Reproducir' : 'Reanudar'; }
+    if(c){
+      estCap.textContent = c.cap;
+      estTxt.textContent = T.hold ? 'Vea la pieza destacada y pulse continuar cuando quiera' : `${c.titulo} · ${T.i+1} de ${CLIPS.length}`;
+    }
+    const hecho = CLIPS.slice(0,Math.max(T.i,0)).reduce((a,x)=>a+x.dur,0) + (c ? Math.min(voz.currentTime||0, c.dur) : 0);
+    progreso.style.width = (hecho/TOTAL*100).toFixed(2)+'%';
+  };
+
+  /* ---- reproducción ---- */
+  const reproducir = (i, {recorrido} = {}) => {
+    if(i<0 || i>=CLIPS.length){ terminar(); return; }
+    const c = CLIPS[i];
+    if(recorrido!==undefined) T.recorrido = recorrido;
+    T.i = i; T.hold = false;
+    c.disparados = 0;
+    abrirBeat(c, false);
+    marcarActivo(c);
+    irA(c);
+    if(!video.paused) video.pause();
+    voz.src = `audio/${c.id}.mp3`;
+    voz.currentTime = 0;
+    barra.classList.add('visible');
+    voz.play().catch(()=>{ /* si el navegador bloquea, dejamos todo visible y a mano */ abrirBeat(c,true); });
+    pintarBarra();
+  };
+  const siguiente = () => reproducir(T.i+1);
+  const anterior = () => reproducir(Math.max(T.i-1,0));
+  const terminar = () => {
+    T.recorrido = false; T.hold = false;
+    voz.pause();
+    marcarActivo(null);
+    estCap.textContent = 'Fin de la propuesta';
+    estTxt.textContent = 'Puede volver a cualquier bloque tocando "Escuchar"';
+    pintarBarra();
+  };
+
+  voz.addEventListener('timeupdate', () => {
+    const c = CLIPS[T.i]; if(!c) return;
+    const cues = c.cues || [];
+    while(c.disparados < cues.length && voz.currentTime >= cues[c.disparados] - 0.15){
+      c.cueEls[c.disparados]?.classList.add('on'); c.disparados++;
+    }
+    pintarBarra();
+  });
+  voz.addEventListener('ended', () => {
+    const c = CLIPS[T.i]; if(!c) return;
+    c.cueEls.forEach(el=>el.classList.add('on'));
+    marcarActivo(null);
+    if(T.recorrido){
+      if(c.hold){ T.hold = true; pintarBarra(); return; }
+      if(T.i+1 < CLIPS.length){ setTimeout(()=>{ if(T.recorrido && !T.hold) siguiente(); }, 700); }
+      else terminar();
+    } else pintarBarra();
+  });
+  voz.addEventListener('play', pintarBarra);
+  voz.addEventListener('pause', pintarBarra);
+
+  /* ---- controles de la barra ---- */
+  btnPlay.addEventListener('click', () => {
+    if(T.hold){ T.hold=false; siguiente(); return; }
+    if(T.i<0){ reproducir(0,{recorrido:true}); return; }
+    if(!voz.paused){ voz.pause(); return; }
+    if(voz.ended){ T.recorrido = true; siguiente(); return; }
+    voz.play();
+  });
+  $('#ctl-next').addEventListener('click', () => { if(T.i<0) reproducir(0,{recorrido:true}); else siguiente(); });
+  $('#ctl-prev').addEventListener('click', anterior);
+  $('#ctl-mute').addEventListener('click', e => {
+    voz.muted = !voz.muted; e.currentTarget.classList.toggle('silencio', voz.muted);
+  });
+  $('#ctl-cerrar').addEventListener('click', () => {
+    voz.pause(); T.recorrido=false; T.hold=false; marcarActivo(null);
+    barra.classList.remove('visible');
+  });
+
+  /* ---- hero ---- */
+  $('#btn-recorrido').addEventListener('click', () => reproducir(0,{recorrido:true}));
+  $('#btn-libre').addEventListener('click', () => { barra.classList.add('visible'); pintarBarra(); });
+
+  /* ---- interacción libre: abrir / escuchar cada beat ---- */
+  CLIPS.forEach(c => {
+    const cabeza = c.el.querySelector('.cabeza');
+    const boton = c.el.querySelector('.abrir');
+    if(!cabeza) return;
+    const activar = ev => {
+      ev.stopPropagation();
+      if(T.i===c.i && !voz.paused){ voz.pause(); return; }   // tocar de nuevo = pausar
+      abrirBeat(c, true);
+      reproducir(c.i, {recorrido:false});
+    };
+    boton?.addEventListener('click', activar);
+    cabeza.addEventListener('click', ev => {
+      if(ev.target.closest('.abrir')) return;
+      if(c.el.classList.contains('plegado')) activar(ev);   // en un beat plegado, toda la cabecera abre
+    });
+  });
+
+  /* ---- video Cyrano: al verlo, la voz se calla; al terminar, se retoma ---- */
+  const verPieza = () => {
+    if(!voz.paused){ voz.pause(); T.reanudarTrasVideo = T.recorrido; } else if(T.hold){ T.reanudarTrasVideo = true; }
+    video.scrollIntoView({behavior:menosMovimiento?'auto':'smooth', block:'center'});
+    video.play();
+  };
+  $('#btn-ver-pieza').addEventListener('click', verPieza);
+  video.addEventListener('play', () => { if(!voz.paused){ voz.pause(); T.reanudarTrasVideo = T.recorrido; } else if(T.hold){ T.reanudarTrasVideo = true; } });
+  video.addEventListener('ended', () => {
+    if(T.reanudarTrasVideo){ T.reanudarTrasVideo=false; if(T.hold){ T.hold=false; siguiente(); } else voz.play(); }
+  });
+
+  /* ---- teclado: espacio = play/pausa, flechas = anterior/siguiente ---- */
+  addEventListener('keydown', e => {
+    if(e.target.matches('input,textarea,button,a,video')) return;
+    if(e.code==='Space'){ e.preventDefault(); btnPlay.click(); }
+    if(e.code==='ArrowRight' && T.i>=0){ siguiente(); }
+    if(e.code==='ArrowLeft' && T.i>=0){ anterior(); }
+  });
+
+  /* ---- la barra aparece sola al pasar la portada ---- */
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => { if(!e.isIntersecting) barra.classList.add('visible'); });
+  }, {threshold:0.05});
+  io.observe($('#inicio'));
+})();
+</script>
+</body>
+</html>
