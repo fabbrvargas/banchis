@@ -181,18 +181,23 @@
   .mes h4{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;margin-bottom:8px}
   .mes p{font-size:15px;line-height:1.55}
   .escenario{
-    display:grid;grid-template-columns:minmax(240px,340px) 1fr;gap:48px;align-items:center;
     background:var(--tinta);color:var(--hueso);border:var(--b) solid var(--tinta);padding:44px;margin-top:14px;
   }
-  .escenario h3{color:var(--hueso);font-size:clamp(24px,3vw,34px);margin:16px 0 18px}
-  .escenario p{color:var(--hueso-2);font-size:17px}
-  .escenario strong{color:var(--hueso)}
-  .escenario .tag{display:inline-block;font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--frito);border:var(--b) solid var(--frito);padding:5px 10px}
+  .esc-texto{display:grid;grid-template-columns:1fr auto;gap:14px 40px;align-items:end;margin-bottom:34px}
+  .esc-texto .tag{grid-column:1;justify-self:start}
+  .esc-texto h3{grid-column:1;color:var(--hueso);font-size:clamp(24px,3vw,34px);margin:0;max-width:22ch}
+  .esc-texto p{grid-column:1;color:var(--hueso-2);font-size:17px;max-width:60ch}
+  .esc-texto strong{color:var(--hueso)}
+  .esc-texto .tag{display:inline-block;font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--frito);border:var(--b) solid var(--frito);padding:5px 10px}
+  .esc-texto .ver-pieza{grid-column:2;grid-row:1 / span 3;align-self:end;margin:0}
+  /* tira: video + 3 fotogramas, todos verticales 9:16 y a la misma altura */
+  .tira{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;align-items:start}
+  .tira figure{margin:0;background:var(--noche);border:var(--b) solid var(--frito-2);padding:10px}
+  .tira figure img{width:100%;aspect-ratio:9/16;object-fit:cover;display:block}
+  .tira figcaption{font-size:11px;color:var(--hueso-2);letter-spacing:.14em;padding:12px 4px 2px;text-align:center;text-transform:uppercase;font-weight:700}
   .video-marco{background:var(--noche);border:var(--b) solid var(--frito);padding:10px;position:relative}
   video{width:100%;display:block;background:#000;aspect-ratio:9/16}
   .video-pie{font-size:11px;color:var(--hueso-2);letter-spacing:.14em;padding:12px 4px 2px;text-align:center;text-transform:uppercase;font-weight:700}
-  .frames{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--b);margin-top:28px}
-  .frames img{width:100%;aspect-ratio:1;object-fit:cover;display:block;border:var(--b) solid var(--frito-2)}
   .ver-pieza{
     display:inline-flex;align-items:center;gap:10px;margin-top:22px;
     background:var(--frito);color:var(--tinta);font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;
@@ -317,8 +322,12 @@
     .mes > div{padding:22px 18px}
     .mes > div:nth-child(odd){border-left:0}
     .mes > div:nth-child(n+3){border-top:var(--b) solid var(--tinta)}
-    .escenario{grid-template-columns:1fr;gap:28px;padding:24px 18px}
-    .escenario .video-marco{max-width:300px;margin:0 auto}
+    .escenario{padding:24px 18px}
+    .esc-texto{grid-template-columns:1fr;margin-bottom:24px}
+    .esc-texto .ver-pieza{grid-column:1;grid-row:auto;justify-self:start;margin-top:6px}
+    .tira{grid-template-columns:repeat(3,1fr);gap:8px}
+    .tira .video-marco{grid-column:1 / -1;max-width:300px;margin:0 auto;width:100%}
+    .tira figure{padding:6px}
     .contraste{grid-template-columns:1fr;gap:22px;padding:36px 22px}
     .dos-col{grid-template-columns:1fr}
     .dos-col .beat{padding:28px 22px 32px}
@@ -495,13 +504,7 @@
       </div>
       <div class="cuerpo">
         <div class="escenario">
-          <div class="video-marco">
-            <video id="cyrano" controls playsinline preload="metadata" poster="../assets/cyrano.jpg">
-              <source src="../videos/cyrano.mp4" type="video/mp4">
-            </video>
-            <div class="video-pie">Cyrano — El sabor de Quito · Referencia</div>
-          </div>
-          <div>
+          <div class="esc-texto">
             <span class="tag">Referencia</span>
             <h3>Este video, hecho para Cyrano, es una referencia.</h3>
             <p>Producto real dentro de una ciudad dibujada a línea. Los videos de Banchis <strong>no tienen que
@@ -509,11 +512,17 @@
             <button class="ver-pieza" type="button" id="btn-ver-pieza">
               <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Ver la pieza
             </button>
-            <div class="frames">
-              <img src="../assets/hogar.jpg" alt="Fotograma: la iglesia de San Francisco ilustrada con panetones reales como cúpulas">
-              <img src="../assets/barrios.jpg" alt="Fotograma: la Virgen del Panecillo sobre un postre real">
-              <img src="../assets/sabores.jpg" alt="Fotograma: la Mitad del Mundo coronada con un pan real">
+          </div>
+          <div class="tira">
+            <div class="video-marco">
+              <video id="cyrano" controls playsinline preload="metadata" poster="../assets/cyrano.jpg">
+                <source src="../videos/cyrano.mp4" type="video/mp4">
+              </video>
+              <div class="video-pie">Cyrano — El sabor de Quito</div>
             </div>
+            <figure><img src="../assets/hogar.jpg" alt="Fotograma: la iglesia de San Francisco ilustrada con panetones reales como cúpulas"><figcaption>Hogar</figcaption></figure>
+            <figure><img src="../assets/barrios.jpg" alt="Fotograma: la Virgen del Panecillo sobre un postre real"><figcaption>Barrios</figcaption></figure>
+            <figure><img src="../assets/sabores.jpg" alt="Fotograma: la Mitad del Mundo coronada con un pan real"><figcaption>Sabores</figcaption></figure>
           </div>
         </div>
       </div>
