@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Splash Labs · Banchis — El plan, visto</title>
+<meta name="description" content="Qué tendría Banchis cada mes: los tipos de pieza con ejemplos reales, cómo se reparte el mes, cómo arrancamos y la inversión.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,700;9..144,900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --papel:#F6F3EA;
+    --papel-2:#ECE6D6;
+    --tinta:#0F0D0A;
+    --tinta-2:#3D372D;
+    --frito:#E8A33D;
+    --frito-2:#B87D18;
+    --noche:#14120E;
+    --hueso:#F5F0E4;
+    --hueso-2:#C9C2B2;
+
+    /* un color por tipo de pieza — se repite en el calendario */
+    --t-pos:#E8A33D;   /* posicionamiento */
+    --t-pau:#C8452C;   /* pauta */
+    --t-dis:#2F7A4E;   /* diseño */
+    --t-esp:#0F0D0A;   /* especial */
+
+    --display:'Fraunces',Georgia,serif;
+    --texto:'DM Sans',system-ui,sans-serif;
+    --max:1120px;
+    --b:2px;
+    --nav:58px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;border-radius:0}
+  html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav) + 8px)}
+  body{
+    background:var(--papel);color:var(--tinta);
+    font-family:var(--texto);font-size:17px;line-height:1.65;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  img,video{display:block;max-width:100%}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+  a{color:inherit}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 32px}
+
+  /* ---------- tipografía base ---------- */
+  .eyebrow{
+    display:inline-block;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;
+    font-weight:700;padding:7px 13px;margin-bottom:26px;border:var(--b) solid currentColor;
+  }
+  h2{
+    font-family:var(--display);font-weight:900;
+    font-size:clamp(34px,5.2vw,62px);line-height:1.02;letter-spacing:-.035em;
+    font-variation-settings:'SOFT' 0,'WONK' 1;max-width:17ch;margin-bottom:26px;
+  }
+  h3{font-family:var(--display);font-weight:900;font-size:clamp(28px,3.4vw,40px);line-height:1.05;letter-spacing:-.03em}
+  .lead{font-size:clamp(17px,1.9vw,20px);line-height:1.6;max-width:60ch;color:var(--tinta-2)}
+  .lead + .lead{margin-top:16px}
+  strong{font-weight:700;color:inherit}
+  em{font-style:normal;background:var(--frito);color:var(--tinta);padding:0 .18em;font-weight:500}
+
+  section{padding:110px 0;border-top:var(--b) solid var(--tinta)}
+  section.noche{background:var(--noche);color:var(--hueso)}
+  section.noche .lead{color:var(--hueso-2)}
+  section.hueso{background:var(--papel-2)}
+
+  /* ---------- barra de navegación ---------- */
+  .nav{
+    position:sticky;top:0;z-index:20;height:var(--nav);
+    background:var(--tinta);color:var(--hueso);
+    display:flex;align-items:center;gap:22px;padding:0 24px;
+  }
+  .nav .marca{font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
+  .nav .marca b{color:var(--frito)}
+  .nav ol{
+    list-style:none;display:flex;gap:4px;margin-left:auto;
+    overflow-x:auto;scrollbar-width:none;
+  }
+  .nav ol::-webkit-scrollbar{display:none}
+  .nav a{
+    display:block;text-decoration:none;white-space:nowrap;
+    font-size:13px;font-weight:500;padding:7px 11px;color:var(--hueso-2);
+    border:1.5px solid transparent;
+  }
+  .nav a span{color:var(--frito);font-weight:700;margin-right:5px}
+  .nav a:hover{color:var(--hueso)}
+  .nav a.activo{color:var(--tinta);background:var(--frito)}
+  .nav a.activo span{color:var(--tinta)}
+
+  /* ---------- 1 · apertura ---------- */
+  .hero{border-top:0;padding:96px 0 100px;min-height:calc(100svh - var(--nav));display:flex;align-items:center}
+  .hero .para{
+    font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:700;margin-bottom:48px;color:var(--tinta-2)
+  }
+  .hero h1{
+    font-family:var(--display);font-weight:900;
+    font-size:clamp(44px,7.6vw,96px);line-height:1.04;letter-spacing:-.028em;max-width:14ch;
+    font-variation-settings:'SOFT' 0,'WONK' 1;
+  }
+  .hero h1 .marca{background:var(--tinta);color:var(--frito);font-style:italic;padding:0 .12em}
+  .hero .bajada{
+    margin-top:34px;font-family:var(--display);font-weight:500;font-size:clamp(21px,2.6vw,30px);
+    line-height:1.3;letter-spacing:-.015em;max-width:30ch;
+  }
+  .hero .texto{margin-top:26px;font-size:clamp(16.5px,1.8vw,19px);color:var(--tinta-2);max-width:58ch}
+  .cifras{display:flex;flex-wrap:wrap;margin-top:56px;border:var(--b) solid var(--tinta);width:fit-content;max-width:100%}
+  .cifras div{padding:16px 24px;border-right:var(--b) solid var(--tinta)}
+  .cifras div:last-child{border-right:0}
+  .cifras b{display:block;font-family:var(--display);font-weight:900;font-size:34px;line-height:1;letter-spacing:-.03em}
+  .cifras span{display:block;margin-top:6px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--tinta-2)}
+
+  /* ---------- 2 · tipos de pieza ---------- */
+  .nota-ej{
+    margin-top:28px;padding:14px 18px;border-left:4px solid var(--frito);background:var(--papel-2);
+    font-size:15px;max-width:66ch;color:var(--tinta-2)
+  }
+  .leyenda-mini{display:flex;flex-wrap:wrap;gap:8px;margin-top:34px}
+  .leyenda-mini a{
+    display:inline-flex;align-items:center;gap:8px;text-decoration:none;
+    border:var(--b) solid var(--tinta);padding:8px 14px;font-size:14px;font-weight:700;background:var(--papel)
+  }
+  .leyenda-mini a:hover{background:var(--tinta);color:var(--papel)}
+  .punto{width:12px;height:12px;flex:none;background:var(--c);border:1.5px solid var(--tinta)}
+
+  .pieza{
+    margin-top:72px;border:var(--b) solid var(--tinta);background:var(--papel);
+    display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);
+  }
+  .pieza-texto{padding:36px 36px 40px;border-right:var(--b) solid var(--tinta);display:flex;flex-direction:column}
+  .pieza-cab{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px}
+  .pieza-num{
+    display:inline-flex;align-items:center;gap:9px;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:700
+  }
+  .pieza-num .punto{width:14px;height:14px}
+  .cuenta{font-size:13px;font-weight:700;padding:5px 10px;background:var(--c);color:var(--cc,var(--tinta));white-space:nowrap}
+  .pieza h3{margin-bottom:22px}
+  .campo{padding:16px 0;border-top:1.5px solid var(--hueso-2)}
+  .campo:first-of-type{border-top:0;padding-top:0}
+  .campo dt{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--tinta-2);margin-bottom:6px}
+  .campo dd{font-size:16.5px;line-height:1.6}
+  .formatos{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+  .formatos span{border:1.5px solid var(--tinta);padding:3px 10px;font-size:13px;font-weight:700}
+
+  .pieza-ej{padding:30px;background:var(--papel-2);display:flex;flex-direction:column;justify-content:center;gap:16px}
+  .ej-titulo{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--tinta-2)}
+  .ejemplos{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
+
+  .ej{
+    position:relative;display:block;text-align:left;background:var(--tinta);color:var(--hueso);
+    border:var(--b) solid var(--tinta);overflow:hidden;
+  }
+  .ej.v{width:min(250px,100%)}
+  .ej.h{width:100%}
+  .ej.sq{width:min(250px,100%)}
+  .ej .marco{position:relative;overflow:hidden;background:#000}
+  .ej.v .marco{aspect-ratio:9/16}
+  .ej.h .marco{aspect-ratio:16/9}
+  .ej.sq .marco{aspect-ratio:1/1}
+  .ej .marco img,.ej .marco video{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+  .ej:hover .marco img,.ej:hover .marco video{transform:scale(1.03)}
+  .ej .play{
+    position:absolute;left:14px;bottom:14px;display:flex;align-items:center;gap:8px;
+    background:var(--frito);color:var(--tinta);font-weight:700;font-size:13.5px;padding:8px 13px 8px 10px;
+    border:var(--b) solid var(--tinta);
+  }
+  .ej .play svg{width:16px;height:16px;fill:currentColor}
+  .ej .dur{
+    position:absolute;right:12px;top:12px;font-size:12px;font-weight:700;letter-spacing:.06em;
+    background:rgba(15,13,10,.78);color:var(--hueso);padding:3px 8px
+  }
+  .ej .pie{padding:11px 14px 13px;font-size:13.5px;line-height:1.45;border-top:var(--b) solid var(--tinta)}
+  .ej .pie b{display:block;font-size:14.5px;color:var(--frito)}
+  .ej:focus-visible{outline:3px solid var(--frito);outline-offset:3px}
+
+  /* boceto de carrusel (pieza de diseño) */
+  .carrusel{
+    display:flex;gap:10px;overflow-x:auto;padding-bottom:10px;scroll-snap-type:x mandatory;
+    scrollbar-width:thin;scrollbar-color:var(--tinta) transparent;
+  }
+  .lamina{
+    flex:none;width:186px;aspect-ratio:4/5;scroll-snap-align:start;border:var(--b) solid var(--tinta);
+    background:var(--papel);display:flex;flex-direction:column;justify-content:space-between;padding:16px 15px;position:relative
+  }
+  .lamina .n{font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--tinta-2)}
+  .lamina .t{font-family:var(--display);font-weight:900;font-size:25px;line-height:1.02;letter-spacing:-.03em}
+  .lamina .s{font-size:12.5px;line-height:1.4;color:var(--tinta-2)}
+  .lamina .bolsa{
+    align-self:center;width:62px;height:78px;border:var(--b) solid var(--tinta);background:var(--frito);
+    clip-path:polygon(6% 0,94% 0,100% 8%,92% 100%,8% 100%,0 8%);display:grid;place-items:center;
+    font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase
+  }
+  .lamina.portada{background:var(--tinta);color:var(--hueso)}
+  .lamina.portada .t{font-size:27px}
+  .lamina.portada .t i{font-style:italic;color:var(--frito)}
+  .lamina.portada .n{color:var(--hueso-2)}
+  .lamina.cierre{background:var(--t-dis);color:var(--hueso)}
+  .lamina.cierre .n,.lamina.cierre .s{color:#D7E8DC}
+  .boceto-pie{font-size:13.5px;color:var(--tinta-2)}
+
+  /* ---------- 3 · el mes ---------- */
+  .mes-grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:40px;margin-top:56px;align-items:start}
+  .cal{border:var(--b) solid var(--tinta);background:var(--papel)}
+  .cal-cab,.semana{display:grid;grid-template-columns:132px 1.8fr .7fr 1.8fr .7fr 1.8fr .7fr .7fr}
+  .cal-cab div{
+    padding:10px 8px;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;text-align:center;
+    border-left:1.5px solid var(--hueso-2);color:var(--tinta-2)
+  }
+  .cal-cab div:first-child{border-left:0}
+  .semana{border-top:var(--b) solid var(--tinta);min-height:104px}
+  .semana .sem{
+    padding:14px 12px;font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
+    display:flex;flex-direction:column;justify-content:center;gap:2px;background:var(--papel-2)
+  }
+  .semana .sem b{white-space:nowrap}
+  .semana .sem small{font-weight:500;letter-spacing:0;text-transform:none;font-size:13px;color:var(--tinta-2)}
+  .dia{border-left:1.5px solid var(--hueso-2);padding:8px 6px;display:flex;align-items:stretch}
+  .dia .dl{display:none}
+  .chip{
+    width:100%;display:flex;flex-direction:column;justify-content:space-between;gap:6px;
+    background:var(--c);color:var(--cc,var(--tinta));border:var(--b) solid var(--tinta);
+    padding:8px 9px;font-size:12.5px;font-weight:700;line-height:1.2;text-align:left;hyphens:auto;-webkit-hyphens:auto;overflow-wrap:anywhere;
+    transition:opacity .25s ease,transform .25s ease;
+  }
+  .chip small{font-weight:500;font-size:11.5px;opacity:.85}
+  .chip.esp{box-shadow:4px 4px 0 var(--frito)}
+  .chip.esp::after{content:"★ La del mes";font-size:11px;color:var(--frito)}
+  .cal.filtrado .chip{opacity:.16}
+  .cal.filtrado .chip.on{opacity:1;transform:translateY(-2px)}
+
+  .mes-lado{display:flex;flex-direction:column;gap:18px}
+  .filtros{border:var(--b) solid var(--tinta);background:var(--papel)}
+  .filtros p{padding:12px 16px;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--tinta-2);border-bottom:var(--b) solid var(--tinta)}
+  .filtro{
+    width:100%;display:grid;grid-template-columns:16px 1fr auto;gap:12px;align-items:center;
+    padding:13px 16px;border-top:1.5px solid var(--hueso-2);text-align:left;font-weight:700;font-size:15px;
+  }
+  .filtro:first-of-type{border-top:0}
+  .filtro .punto{width:16px;height:16px}
+  .filtro .n{font-family:var(--display);font-weight:900;font-size:24px;line-height:1}
+  .filtro:hover,.filtro.on{background:var(--tinta);color:var(--papel)}
+  .total{
+    display:grid;grid-template-columns:1fr auto;align-items:center;padding:14px 16px;
+    border-top:var(--b) solid var(--tinta);font-weight:700
+  }
+  .total b{font-family:var(--display);font-weight:900;font-size:34px;line-height:1}
+  .barra12{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;padding:0 16px 16px}
+  .barra12 i{aspect-ratio:1;background:var(--c);border:1.5px solid var(--tinta);transition:opacity .25s}
+  .filtros.filtrado .barra12 i{opacity:.18}
+  .filtros.filtrado .barra12 i.on{opacity:1}
+  .desglose{font-size:14.5px;line-height:1.55;color:var(--tinta-2);padding:16px 18px;border:var(--b) solid var(--tinta);background:var(--papel)}
+  .desglose b{color:var(--tinta)}
+  .nota-mes{
+    margin-top:40px;display:flex;gap:18px;align-items:flex-start;padding:22px 24px;
+    background:var(--tinta);color:var(--hueso);max-width:780px
+  }
+  .nota-mes .ico{flex:none;font-family:var(--display);font-weight:900;font-size:40px;line-height:.8;color:var(--frito)}
+  .nota-mes p{font-size:16.5px}
+  .nota-mes strong{color:var(--frito)}
+
+  /* ---------- 4 · arranque ---------- */
+  .arranque{display:grid;grid-template-columns:330px minmax(0,1fr);gap:48px;margin-top:56px;align-items:start}
+  .mini-cal{position:sticky;top:calc(var(--nav) + 24px);border:var(--b) solid var(--tinta);background:var(--papel)}
+  .mini-cal .mc-tit{
+    padding:12px 14px;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;
+    border-bottom:var(--b) solid var(--tinta);display:flex;justify-content:space-between
+  }
+  .mc-dias,.mc-fila{display:grid;grid-template-columns:repeat(7,1fr)}
+  .mc-dias span{font-size:10.5px;font-weight:700;text-align:center;padding:7px 0;color:var(--tinta-2)}
+  .mc-fila{position:relative;border-top:1.5px solid var(--hueso-2)}
+  .mc-fila span{font-size:13px;text-align:center;padding:9px 0;position:relative;z-index:1}
+  .mc-fila span.otro{color:var(--hueso-2)}
+  .mc-fila[data-f]{background:var(--fc)}
+  .mc-fila[data-f] span{color:var(--fcc,var(--tinta))}
+  .mc-fila .hito{font-weight:700;outline:var(--b) solid var(--tinta);outline-offset:-4px;background:var(--papel)}
+  .mc-fila .hito.prod{background:var(--frito);color:var(--tinta)}
+  .mc-fila .mc-etq{
+    display:block;grid-column:1/-1;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    padding:0 10px 7px;text-align:left !important;
+  }
+  .mc-ley{padding:12px 14px;border-top:var(--b) solid var(--tinta);font-size:12.5px;color:var(--tinta-2);line-height:1.5}
+
+  .pasos{list-style:none;position:relative}
+  .pasos::before{content:"";position:absolute;left:19px;top:10px;bottom:10px;width:var(--b);background:var(--tinta)}
+  .paso{position:relative;padding:0 0 38px 68px}
+  .paso:last-child{padding-bottom:0}
+  .paso .nodo{
+    position:absolute;left:0;top:0;width:40px;height:40px;border:var(--b) solid var(--tinta);background:var(--fc,var(--papel));
+    color:var(--fcc,var(--tinta));display:grid;place-items:center;font-family:var(--display);font-weight:900;font-size:19px
+  }
+  .paso .cuando{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--tinta-2);margin-bottom:4px;padding-top:2px}
+  .paso h4{font-family:var(--display);font-weight:900;font-size:clamp(24px,2.6vw,30px);line-height:1.1;letter-spacing:-.025em;margin-bottom:10px}
+  .paso p{max-width:58ch;color:var(--tinta-2)}
+  .paso.final h4{background:var(--frito);display:inline;padding:0 .14em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+  .paso .entregas{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+  .paso .entregas span{font-size:13px;font-weight:700;border:1.5px solid var(--tinta);padding:3px 10px;background:var(--papel)}
+
+  /* ---------- 5 · pauta ---------- */
+  .pauta-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:56px;align-items:start;margin-top:8px}
+  .monto{
+    border:var(--b) solid var(--hueso);padding:30px 30px 26px;position:relative
+  }
+  .monto .cifra{white-space:nowrap;font-family:var(--display);font-weight:900;font-size:clamp(72px,8.4vw,112px);line-height:.85;letter-spacing:-.05em;color:var(--frito)}
+  .monto .cifra small{font-size:.28em;letter-spacing:-.01em;color:var(--hueso);margin-left:6px}
+  .monto p{margin-top:16px;font-size:16.5px;color:var(--hueso-2);max-width:42ch}
+  .monto p strong{color:var(--hueso)}
+  .carriles{margin-top:22px;border:var(--b) solid var(--hueso)}
+  .carril{padding:18px 20px}
+  .carril + .carril{border-top:var(--b) solid var(--hueso)}
+  .carril .ct{display:flex;justify-content:space-between;gap:12px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:12px}
+  .carril .ct span:last-child{color:var(--frito)}
+  .pista{height:14px;border:1.5px solid var(--hueso-2);position:relative;overflow:hidden}
+  .pista i{position:absolute;inset:0 auto 0 0;width:0;background:var(--hueso-2);transition:width 2.4s cubic-bezier(.2,.7,.2,1)}
+  .carril.con .pista i{background:var(--frito);transition-duration:1s}
+  .vista .carril.sin .pista i{width:26%}
+  .vista .carril.con .pista i{width:100%}
+  .carril small{display:block;margin-top:9px;font-size:13px;color:var(--hueso-2)}
+  .claves{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin-top:64px;border:var(--b) solid var(--hueso)}
+  .clave{padding:24px 24px 26px}
+  .clave + .clave{border-left:var(--b) solid var(--hueso)}
+  .clave .k{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--frito);margin-bottom:10px}
+  .clave p{font-size:16px;color:var(--hueso-2)}
+  .clave p strong{color:var(--hueso)}
+
+  /* ---------- 6 · preguntas ---------- */
+  .faq{margin-top:48px;border-top:var(--b) solid var(--tinta);max-width:880px}
+  .faq details{border-bottom:var(--b) solid var(--tinta)}
+  .faq summary{
+    list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;
+    padding:24px 4px;font-family:var(--display);font-weight:700;font-size:clamp(20px,2.4vw,26px);line-height:1.2;letter-spacing:-.02em
+  }
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary .mas{
+    flex:none;width:36px;height:36px;border:var(--b) solid var(--tinta);display:grid;place-items:center;
+    font-family:var(--texto);font-size:22px;font-weight:500;transition:transform .25s,background .25s
+  }
+  .faq details[open] summary .mas{transform:rotate(45deg);background:var(--frito)}
+  .faq summary:hover .mas{background:var(--frito)}
+  .faq .resp{padding:0 60px 28px 4px;font-size:17.5px;color:var(--tinta-2);max-width:66ch}
+
+  /* ---------- 7 · inversión ---------- */
+  .inversion{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);border:var(--b) solid var(--tinta);margin-top:48px;background:var(--papel)}
+  .inv-precio{padding:40px;background:var(--tinta);color:var(--hueso);display:flex;flex-direction:column;justify-content:space-between;gap:30px}
+  .inv-precio .k{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--hueso-2)}
+  .inv-precio .p{font-family:var(--display);font-weight:900;font-size:clamp(70px,9vw,118px);line-height:.88;letter-spacing:-.05em;color:var(--frito)}
+  .inv-precio .p small{display:block;margin-top:14px;font-family:var(--texto);font-weight:500;font-size:17px;letter-spacing:0;color:var(--hueso)}
+  .inv-precio ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+  .inv-precio li{display:flex;gap:12px;font-size:16px}
+  .inv-precio li::before{content:"✓";color:var(--frito);font-weight:700}
+  .inv-cond{display:flex;flex-direction:column}
+  .cond{padding:26px 32px;border-top:var(--b) solid var(--tinta)}
+  .cond:first-child{border-top:0}
+  .cond .k{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--tinta-2);margin-bottom:6px}
+  .cond p{font-size:17px}
+  .cond .mitades{display:grid;grid-template-columns:1fr 1fr;margin-top:12px;border:var(--b) solid var(--tinta)}
+  .cond .mitades div{padding:10px 12px;font-size:13.5px;line-height:1.35}
+  .cond .mitades div + div{border-left:var(--b) solid var(--tinta)}
+  .cond .mitades b{display:block;font-family:var(--display);font-weight:900;font-size:24px}
+  .cond.aparte{background:var(--papel-2)}
+
+  /* ---------- 8 · siguiente paso ---------- */
+  .cierre{padding:130px 0 120px}
+  .cierre h2{max-width:14ch}
+  .cierre .fechas{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:48px;border:var(--b) solid var(--hueso)}
+  .cierre .fechas div{padding:24px 24px 26px}
+  .cierre .fechas div + div{border-left:var(--b) solid var(--hueso)}
+  .cierre .fechas b{display:block;font-family:var(--display);font-weight:900;font-size:clamp(28px,3.4vw,40px);line-height:1;letter-spacing:-.03em;color:var(--frito);margin-bottom:10px}
+  .cierre .fechas span{font-size:16px;color:var(--hueso-2)}
+  .cta{
+    display:inline-flex;align-items:center;gap:12px;margin-top:52px;text-decoration:none;
+    background:var(--frito);color:var(--tinta);font-weight:700;font-size:16px;padding:18px 28px;border:var(--b) solid var(--frito)
+  }
+  .cta:hover{background:transparent;color:var(--frito)}
+  .cta svg{width:20px;height:20px;fill:currentColor}
+  footer{background:var(--noche);color:var(--hueso-2);border-top:1.5px solid #2c2820;padding:28px 0;font-size:13px}
+  footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  footer b{color:var(--hueso);letter-spacing:.14em;text-transform:uppercase;font-size:12px}
+
+  /* ---------- reproductor ---------- */
+  dialog.visor{
+    border:0;padding:0;background:transparent;max-width:none;max-height:none;width:100vw;height:100vh;
+    display:none;
+  }
+  dialog.visor[open]{display:grid;place-items:center}
+  dialog.visor::backdrop{background:rgba(10,9,7,.92)}
+  .visor-caja{position:relative;display:flex;flex-direction:column;align-items:center;gap:12px;padding:56px 16px 20px;width:100%;height:100%;justify-content:center}
+  .visor video{max-height:calc(100vh - 140px);max-width:min(1200px,100%);background:#000;border:var(--b) solid var(--hueso)}
+  .visor .vt{color:var(--hueso);font-size:14.5px;text-align:center}
+  .visor .vt b{color:var(--frito)}
+  .visor .cerrar{
+    position:absolute;top:14px;right:16px;width:44px;height:44px;border:var(--b) solid var(--hueso);color:var(--hueso);
+    font-size:24px;line-height:1;display:grid;place-items:center
+  }
+  .visor .cerrar:hover{background:var(--frito);color:var(--tinta);border-color:var(--frito)}
+
+  /* ---------- entrada suave ---------- */
+  .js .aparece{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+  .js .aparece.vista{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .js .aparece{opacity:1;transform:none;transition:none}
+    .pista i{transition:none !important}
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width:980px){
+    .pieza{grid-template-columns:1fr}
+    .pieza-texto{border-right:0;border-bottom:var(--b) solid var(--tinta)}
+    .mes-grid{grid-template-columns:1fr}
+    .mes-lado{display:grid;grid-template-columns:1fr 1fr;align-items:start}
+    .arranque{grid-template-columns:1fr}
+    .mini-cal{position:static;max-width:380px}
+    .pauta-grid{grid-template-columns:1fr;gap:36px}
+    .inversion{grid-template-columns:1fr}
+  }
+  @media (max-width:760px){
+    .nav .marca{display:none}
+    .nav{padding:0 8px}
+    .nav ol{margin-left:0}
+    .nav a{padding:7px 9px}
+    .wrap{padding:0 16px}
+    section{padding:76px 0}
+    .hero{padding:64px 0 72px;min-height:0}
+    .hero .para{margin-bottom:32px}
+    .cifras{width:100%}
+    .cifras div{flex:1 1 33%;padding:14px 14px}
+    .cifras b{font-size:28px}
+    .cifras span{font-size:10.5px;letter-spacing:.08em}
+    .pieza{margin-top:48px}
+    .pieza-texto{padding:26px 20px 28px}
+    .pieza-ej{padding:20px 16px}
+    .ejemplos{gap:12px}
+    .ej.v,.ej.sq{width:calc(50% - 6px)}
+    .ej .play{left:8px;bottom:8px;font-size:12.5px;padding:6px 10px 6px 8px}
+    .ej .pie{padding:9px 10px 10px;font-size:12.5px}
+    .ej .pie b{font-size:13.5px}
+    .lamina{width:160px}
+
+    /* el calendario se vuelve lista por semana */
+    .cal-cab{display:none}
+    .semana{grid-template-columns:1fr 1fr 1fr;min-height:0}
+    .semana .sem{grid-column:1/-1;flex-direction:row;align-items:baseline;gap:10px;padding:10px 12px;border-bottom:1.5px solid var(--hueso-2)}
+    .dia{border-left:0;padding:8px 5px;flex-direction:column;gap:5px}
+    .dia + .dia{border-left:1.5px solid var(--hueso-2)}
+    .dia.vacio{display:none}
+    .dia .dl{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--tinta-2)}
+    .chip{flex:1;font-size:12px}
+    .mes-lado{grid-template-columns:1fr}
+
+    .claves{grid-template-columns:1fr}
+    .clave + .clave{border-left:0;border-top:var(--b) solid var(--hueso)}
+    .faq .resp{padding-right:4px}
+    .inv-precio{padding:28px 20px}
+    .cond{padding:22px 20px}
+    .cierre{padding:84px 0 80px}
+    .cierre .fechas{grid-template-columns:1fr}
+    .cierre .fechas div + div{border-left:0;border-top:var(--b) solid var(--hueso)}
+    .cta{width:100%;justify-content:center}
+    .paso{padding-left:58px}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Secciones">
+  <div class="marca">Splash Labs <b>×</b> Banchis</div>
+  <ol>
+    <li><a href="#inicio"><span>1</span>Inicio</a></li>
+    <li><a href="#piezas"><span>2</span>Piezas</a></li>
+    <li><a href="#mes"><span>3</span>El mes</a></li>
+    <li><a href="#arranque"><span>4</span>Arranque</a></li>
+    <li><a href="#pauta"><span>5</span>Pauta</a></li>
+    <li><a href="#preguntas"><span>6</span>Preguntas</a></li>
+    <li><a href="#inversion"><span>7</span>Inversión</a></li>
+    <li><a href="#siguiente"><span>8</span>Siguiente paso</a></li>
+  </ol>
+</nav>
+
+<!-- ============ 1 · APERTURA ============ -->
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <div class="para">Para Francisco · Banchis Food S.A. · Octubre 2026</div>
+    <h1>Esto es lo que vamos a hacer por <span class="marca">Banchis</span></h1>
+    <p class="bajada">No es una propuesta nueva. Es la de siempre, pero esta vez puede verla.</p>
+    <p class="texto">Hablar de “piezas de contenido” en un documento es abstracto. Acá están los ejemplos reales de cada
+      tipo de pieza que produciríamos, cómo se reparte el mes, cómo arrancamos y qué pasa desde el día que nos dé el sí.</p>
+    <div class="cifras">
+      <div><b>12</b><span>Piezas al mes</span></div>
+      <div><b>3</b><span>Por semana</span></div>
+      <div><b>2</b><span>Jornadas de grabación</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2 · TIPOS DE PIEZA ============ -->
+<section id="piezas" class="hueso">
+  <div class="wrap">
+    <div class="aparece">
+      <div class="eyebrow">02 · Los tipos de pieza</div>
+      <h2>No todas las piezas hacen lo mismo</h2>
+      <p class="lead">Cada una tiene un trabajo distinto, y el mes se arma combinándolas. Tanto las piezas de
+        posicionamiento como las de pauta pueden ser video o diseño — <strong>lo que las define es su objetivo, no su formato.</strong></p>
+      <p class="nota-ej">Los ejemplos son trabajos nuestros para otras marcas. Sirven para ver el tipo de pieza y el nivel
+        de acabado; las de Banchis tendrán su propio lenguaje visual, el que definimos en el arranque.</p>
+      <div class="leyenda-mini">
+        <a href="#p-pos"><i class="punto" style="--c:var(--t-pos)"></i>Posicionamiento</a>
+        <a href="#p-pau"><i class="punto" style="--c:var(--t-pau)"></i>Pauta</a>
+        <a href="#p-dis"><i class="punto" style="--c:var(--t-dis)"></i>Diseño</a>
+        <a href="#p-esp"><i class="punto" style="--c:var(--t-esp)"></i>Especial</a>
+      </div>
+    </div>
+
+    <!-- Posicionamiento -->
+    <article class="pieza aparece" id="p-pos">
+      <div class="pieza-texto">
+        <div class="pieza-cab">
+          <span class="pieza-num"><i class="punto" style="--c:var(--t-pos)"></i>Tipo 1</span>
+          <span class="cuenta" style="--c:var(--t-pos)">6 de 12 al mes</span>
+        </div>
+        <h3>Pieza de posicionamiento</h3>
+        <dl>
+          <div class="campo"><dt>Qué hace</dt><dd>Construye memoria de marca. No vende directamente — hace que Banchis exista en la cabeza de la gente.</dd></div>
+          <div class="campo"><dt>Cuándo se usa</dt><dd>Es el grueso del mes. Son las piezas que, repetidas, hacen que alguien entre a la tienda y pida Banchis por su nombre.</dd></div>
+          <div class="campo"><dt>Formato</dt><dd>Video o diseño, según lo que mejor cuente la idea.<div class="formatos"><span>Video</span><span>Diseño</span></div></dd></div>
+        </dl>
+      </div>
+      <div class="pieza-ej">
+        <div class="ej-titulo">Ejemplo</div>
+        <div class="ejemplos">
+          <button class="ej v" type="button" data-src="../media/schweppes.mp4" data-titulo="Schweppes" data-desc="Pieza de posicionamiento">
+            <div class="marco"><img src="../media/schweppes.jpg" alt="Fotograma del video de Schweppes" loading="lazy"><span class="dur">0:27</span>
+              <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>Ver</span></div>
+            <div class="pie"><b>Schweppes</b>El producto dentro de un momento cotidiano</div>
+          </button>
+        </div>
+      </div>
+    </article>
+
+    <!-- Pauta -->
+    <article class="pieza aparece" id="p-pau">
+      <div class="pieza-texto">
+        <div class="pieza-cab">
+          <span class="pieza-num"><i class="punto" style="--c:var(--t-pau)"></i>Tipo 2</span>
+          <span class="cuenta" style="--c:var(--t-pau);--cc:var(--hueso)">2 de 12 al mes</span>
+        </div>
+        <h3>Pieza de pauta</h3>
+        <dl>
+          <div class="campo"><dt>Qué hace</dt><dd>Está construida para llegar a gente que todavía no conoce la marca. Mensaje más directo, gancho más rápido, pensada desde el inicio para funcionar con inversión detrás.</dd></div>
+          <div class="campo"><dt>Cuándo se usa</dt><dd>Cuando queremos alcance, no solo profundidad. Además de pautarse, estas piezas también viven en el perfil como contenido orgánico.</dd></div>
+          <div class="campo"><dt>Formato</dt><dd><div class="formatos"><span>Video</span><span>Diseño</span></div></dd></div>
+        </dl>
+      </div>
+      <div class="pieza-ej">
+        <div class="ej-titulo">Ejemplo</div>
+        <div class="ejemplos">
+          <button class="ej v" type="button" data-src="../media/reel-pauta.mp4" data-titulo="Reel de pauta" data-desc="Pieza de pauta">
+            <div class="marco"><img src="../media/reel-pauta.jpg" alt="Fotograma del reel de pauta" loading="lazy"><span class="dur">1:13</span>
+              <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>Ver</span></div>
+            <div class="pie"><b>Reel de pauta</b>Gancho en los primeros segundos, pensado para pautar</div>
+          </button>
+        </div>
+      </div>
+    </article>
+
+    <!-- Diseño -->
+    <article class="pieza aparece" id="p-dis">
+      <div class="pieza-texto">
+        <div class="pieza-cab">
+          <span class="pieza-num"><i class="punto" style="--c:var(--t-dis)"></i>Tipo 3</span>
+          <span class="cuenta" style="--c:var(--t-dis);--cc:var(--hueso)">3 de 12 al mes</span>
+        </div>
+        <h3>Pieza de diseño</h3>
+        <dl>
+          <div class="campo"><dt>Qué hace</dt><dd>Comunica lo que un video no alcanza a explicar. Es el formato ideal para mostrar la línea completa de productos — que las yuquitas, los cueritos y los cereales también son Banchis.</dd></div>
+          <div class="campo"><dt>Cuándo se usa</dt><dd>Para educar, comparar, listar. Donde hace falta que la gente se detenga a leer.</dd></div>
+          <div class="campo"><dt>Formato</dt><dd><div class="formatos"><span>Carrusel</span><span>Gráfica</span></div></dd></div>
+        </dl>
+      </div>
+      <div class="pieza-ej">
+        <div class="ej-titulo">Cómo se arma un carrusel de línea de productos</div>
+        <div class="carrusel" aria-label="Boceto de carrusel, deslice para ver las láminas">
+          <div class="lamina portada"><span class="n">1 / 6</span><span class="t">Todo esto también es <i>Banchis</i></span><span class="s">Deslice →</span></div>
+          <div class="lamina"><span class="n">2 / 6</span><span class="bolsa">Chifles</span><span class="t">Chifles</span></div>
+          <div class="lamina"><span class="n">3 / 6</span><span class="bolsa">Yuquitas</span><span class="t">Yuquitas</span></div>
+          <div class="lamina"><span class="n">4 / 6</span><span class="bolsa">Cueritos</span><span class="t">Cueritos</span></div>
+          <div class="lamina"><span class="n">5 / 6</span><span class="bolsa">Papitas</span><span class="t">Papitas</span></div>
+          <div class="lamina cierre"><span class="n">6 / 6</span><span class="t">31 años en su tienda de siempre</span><span class="s">Pídalos por su nombre.</span></div>
+        </div>
+        <p class="boceto-pie">Boceto de estructura: una portada que engancha, una lámina por producto y un cierre que lleva a la tienda.</p>
+      </div>
+    </article>
+
+    <!-- Especial -->
+    <article class="pieza aparece" id="p-esp">
+      <div class="pieza-texto">
+        <div class="pieza-cab">
+          <span class="pieza-num"><i class="punto" style="--c:var(--t-esp)"></i>Tipo 4</span>
+          <span class="cuenta" style="--c:var(--t-esp);--cc:var(--frito)">1 de 12 al mes</span>
+        </div>
+        <h3>Pieza especial</h3>
+        <dl>
+          <div class="campo"><dt>Qué hace</dt><dd>Es la de mayor producción del mes. Dirección, luz, montaje y post cuidados al detalle. La que se ve como la de una marca grande.</dd></div>
+          <div class="campo"><dt>Cuándo se usa</dt><dd>Una al mes, como el momento fuerte. También entran acá los packshots en 3D del producto.</dd></div>
+        </dl>
+      </div>
+      <div class="pieza-ej">
+        <div class="ej-titulo">Ejemplos</div>
+        <div class="ejemplos">
+          <button class="ej v" type="button" data-src="../media/cyrano.mp4" data-titulo="Cyrano — El sabor de Quito" data-desc="Pieza especial">
+            <div class="marco"><img src="../assets/cyrano.jpg" alt="Fotograma del video de Cyrano: la ciudad dibujada a línea con producto real" loading="lazy"><span class="dur">0:24</span>
+              <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>Ver</span></div>
+            <div class="pie"><b>Cyrano</b>Producto real dentro de un Quito ilustrado</div>
+          </button>
+          <button class="ej sq" type="button" data-src="../media/packshot-3d.mp4" data-titulo="Packshot 3D" data-desc="Pieza especial · 3D" data-loop>
+            <div class="marco"><video src="../media/packshot-3d.mp4" poster="../media/packshot-3d.jpg" muted loop playsinline autoplay preload="none" aria-label="Packshot 3D de un empaque de café"></video><span class="dur">3D</span>
+              <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>Ampliar</span></div>
+            <div class="pie"><b>Packshot 3D</b>El empaque en escena, sin salir a grabar</div>
+          </button>
+          <button class="ej h" type="button" data-src="../media/krispykreme.mp4" data-titulo="Krispy Kreme" data-desc="Pieza institucional · motion graphics y 3D">
+            <div class="marco"><img src="../assets/buen_rollo.jpg" alt="Fotograma del video de Krispy Kreme" loading="lazy"><span class="dur">2:40</span>
+              <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>Ver</span></div>
+            <div class="pie"><b>Krispy Kreme</b>Pieza institucional en motion graphics y 3D</div>
+          </button>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ 3 · CÓMO SE VE UN MES ============ -->
+<section id="mes">
+  <div class="wrap">
+    <div class="aparece">
+      <div class="eyebrow">03 · Cómo se ve un mes</div>
+      <h2>12 piezas. Así se reparten.</h2>
+      <p class="lead">Doce piezas al mes suena a poco escrito en un documento. Repartidas en el calendario, es contenido
+        saliendo <strong>tres veces por semana, todas las semanas.</strong></p>
+    </div>
+
+    <div class="mes-grid aparece">
+      <div class="cal" id="cal">
+        <div class="cal-cab"><div></div><div>Lun</div><div>Mar</div><div>Mié</div><div>Jue</div><div>Vie</div><div>Sáb</div><div>Dom</div></div>
+        <!-- se completa desde el script (SEMANAS) -->
+      </div>
+
+      <div class="mes-lado">
+        <div class="filtros" id="filtros">
+          <p>Toque un tipo para verlo en el mes</p>
+          <button class="filtro" type="button" data-t="pos"><i class="punto" style="--c:var(--t-pos)"></i>Posicionamiento<span class="n">6</span></button>
+          <button class="filtro" type="button" data-t="pau"><i class="punto" style="--c:var(--t-pau)"></i>Pauta<span class="n">2</span></button>
+          <button class="filtro" type="button" data-t="dis"><i class="punto" style="--c:var(--t-dis)"></i>Diseño<span class="n">3</span></button>
+          <button class="filtro" type="button" data-t="esp"><i class="punto" style="--c:var(--t-esp)"></i>Especial<span class="n">1</span></button>
+          <div class="total"><span>Total del mes</span><b>12</b></div>
+          <div class="barra12" id="barra12"></div>
+        </div>
+        <div class="desglose">En la propuesta: <b>8 videos producidos</b> (posicionamiento y pauta), <b>3 piezas de diseño</b> y
+          <b>1 pieza especial</b>. Todo sale de <b>2 jornadas de grabación</b> al mes.</div>
+      </div>
+    </div>
+
+    <div class="nota-mes aparece">
+      <span class="ico">↻</span>
+      <p>La mezcla se ajusta cada mes según lo que esté funcionando. <strong>Lo constante es el ritmo:</strong> tres piezas por semana, todas las semanas.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4 · CÓMO ARRANCAMOS ============ -->
+<section id="arranque" class="hueso">
+  <div class="wrap">
+    <div class="aparece">
+      <div class="eyebrow">04 · Cómo arrancamos</div>
+      <h2>Del sí al primer contenido</h2>
+      <p class="lead">Banchis no tiene equipo de marketing, así que nosotros cubrimos ese espacio completo. Antes de grabar
+        una sola toma, hay trabajo que define todo lo demás.</p>
+    </div>
+
+    <div class="arranque">
+      <div class="mini-cal aparece" aria-hidden="true">
+        <div class="mc-tit"><span>Octubre → Noviembre</span><span>2026</span></div>
+        <div class="mc-dias"><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
+        <div class="mc-fila"><span>5</span><span>6</span><span>7</span><span class="hito">8</span><span>9</span><span>10</span><span>11</span><span class="mc-etq">8 oct · Usted da el sí</span></div>
+        <div class="mc-fila" data-f style="--fc:#F2D9A8"><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span class="mc-etq">Estudio de marca</span></div>
+        <div class="mc-fila" data-f style="--fc:#E8A33D"><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span class="mc-etq">Dirección visual</span></div>
+        <div class="mc-fila" data-f style="--fc:#B87D18;--fcc:#fff"><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span><span>1</span><span class="mc-etq">Presentación y aprobación</span></div>
+        <div class="mc-fila" data-f style="--fc:var(--tinta);--fcc:var(--hueso)"><span class="hito prod">2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span class="mc-etq">Comienza la producción</span></div>
+        <div class="mc-ley">Tres semanas de preparación. Producción desde el lunes 2 de noviembre.</div>
+      </div>
+
+      <ol class="pasos">
+        <li class="paso aparece">
+          <span class="nodo" style="--fc:var(--papel)">✓</span>
+          <div class="cuando">Jueves 8 de octubre</div>
+          <h4>Usted nos da el sí</h4>
+          <p>Desde ese momento nos organizamos para arrancar la semana siguiente.</p>
+        </li>
+        <li class="paso aparece">
+          <span class="nodo" style="--fc:#F2D9A8">1</span>
+          <div class="cuando">Semana del 12 de octubre</div>
+          <h4>Estudio de marca</h4>
+          <p>Entendemos Banchis desde adentro: producto, historia, qué valora la gente que ya la consume. Y estudiamos qué
+            está pasando afuera — qué consume hoy el público al que queremos llegar, de qué se habla, qué formatos funcionan en la categoría.</p>
+        </li>
+        <li class="paso aparece">
+          <span class="nodo" style="--fc:#E8A33D">2</span>
+          <div class="cuando">Semana del 19 de octubre</div>
+          <h4>Dirección visual</h4>
+          <p>Moodboards y lenguaje visual propio de Banchis. Cómo se va a ver la marca en pantalla: colores, ritmo, tono, tipo
+            de toma. Esto es lo que hace que todas las piezas se sientan de la misma marca y no publicaciones sueltas.</p>
+        </li>
+        <li class="paso aparece">
+          <span class="nodo" style="--fc:#B87D18;--fcc:#fff">3</span>
+          <div class="cuando">Semana del 26 de octubre</div>
+          <h4>Presentación y aprobación</h4>
+          <p>Le mostramos todo lo que venimos trabajando. <strong>Usted lo aprueba antes de que produzcamos nada.</strong></p>
+          <div class="entregas"><span>Moodboards</span><span>Calendario de publicación</span><span>Contenidos del primer mes con ejemplos</span><span>Sistemas montados</span></div>
+        </li>
+        <li class="paso final aparece">
+          <span class="nodo" style="--fc:var(--tinta);--fcc:var(--frito)">▶</span>
+          <div class="cuando">Lunes 2 de noviembre</div>
+          <h4>Comienza la producción</h4>
+          <p style="margin-top:10px">Con todo aprobado, arranca la producción de los contenidos.</p>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5 · EL ROL DE LA PAUTA ============ -->
+<section id="pauta" class="noche">
+  <div class="wrap">
+    <div class="aparece">
+      <div class="eyebrow">05 · El rol de la pauta</div>
+      <h2 style="max-width:20ch">Con $200 al mes ya se nota</h2>
+    </div>
+    <div class="pauta-grid">
+      <div class="aparece">
+        <p class="lead" style="color:var(--hueso);font-family:var(--display);font-weight:500;font-size:clamp(22px,2.6vw,30px);line-height:1.3;letter-spacing:-.015em">La pauta no reemplaza al contenido. Lo acelera.</p>
+        <p class="lead" style="margin-top:24px">Vale la pena ser claros en algo: hoy Banchis no tiene presencia activa en redes. Eso significa que el
+          contenido orgánico, por bueno que sea, tarda en encontrar audiencia — porque las plataformas muestran primero lo que ya tiene movimiento.</p>
+        <p class="lead">La pauta resuelve eso. Pone el contenido frente a gente que todavía no conoce la marca, y
+          <strong style="color:var(--frito)">acelera el proceso de meses a semanas.</strong></p>
+      </div>
+      <div class="aparece">
+        <div class="monto">
+          <div class="cifra">$200<small>/ mes</small></div>
+          <p><strong>El monto lo decide Banchis.</strong> Con doscientos dólares al mes ya se ve diferencia. Puede ser más, puede ser menos.</p>
+        </div>
+        <div class="carriles" id="carriles">
+          <div class="carril sin">
+            <div class="ct"><span>Solo orgánico</span><span style="color:var(--hueso-2)">Meses</span></div>
+            <div class="pista"><i></i></div>
+            <small>El contenido espera a que la plataforma lo empuje.</small>
+          </div>
+          <div class="carril con">
+            <div class="ct"><span>Con pauta</span><span>Semanas</span></div>
+            <div class="pista"><i></i></div>
+            <small>El contenido llega a gente nueva desde la primera semana.</small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="claves aparece">
+      <div class="clave"><div class="k">Cuánto</div><p><strong>Lo define usted.</strong> $200 es un punto de partida donde ya se ve diferencia, no un mínimo.</p></div>
+      <div class="clave"><div class="k">Cuándo</div><p>Puede empezar <strong>desde el primer mes</strong> o esperar al segundo, cuando ya sabemos qué contenido está funcionando mejor.</p></div>
+      <div class="clave"><div class="k">Cómo</div><p>Se ejecuta <strong>desde la cuenta de Banchis</strong>, con nuestra gestión. Cada dólar es visible y controlado por la empresa.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6 · PREGUNTAS ============ -->
+<section id="preguntas">
+  <div class="wrap">
+    <div class="aparece">
+      <div class="eyebrow">06 · Preguntas</div>
+      <h2>Lo que quizás se está preguntando</h2>
+    </div>
+    <div class="faq aparece">
+      <details open>
+        <summary>¿Cuánto tiempo me va a tomar a mí?<span class="mas">+</span></summary>
+        <p class="resp">Dos jornadas de grabación al mes, y de esas usted solo necesita estar presente en lo que lo involucre
+          directamente. El resto —planificación, producción, edición, publicación— corre por nuestra cuenta.</p>
+      </details>
+      <details>
+        <summary>¿Tengo que salir yo en los videos?<span class="mas">+</span></summary>
+        <p class="resp">No es obligatorio. Hay piezas donde su presencia suma mucho —la historia de la marca, los 31 años— pero el plan no depende de eso.</p>
+      </details>
+      <details>
+        <summary>¿Y si no me gusta lo que producen?<span class="mas">+</span></summary>
+        <p class="resp">Todo pasa por su aprobación antes de publicarse. El plan del primer mes se lo entregamos completo antes
+          de grabar nada, justamente para que no haya sorpresas.</p>
+      </details>
+      <details>
+        <summary>¿Por qué 12 piezas y no más?<span class="mas">+</span></summary>
+        <p class="resp">Porque preferimos 12 piezas bien hechas que 25 que se vean improvisadas. El volumen se puede subir en
+          cualquier momento del ciclo si quiere acelerar.</p>
+      </details>
+      <details>
+        <summary>¿Qué pasa si quiero parar?<span class="mas">+</span></summary>
+        <p class="resp">Lo conversamos. No hay nada que lo obligue a seguir si el trabajo no le está sirviendo.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7 · INVERSIÓN ============ -->
+<section id="inversion" class="hueso">
+  <div class="wrap">
+    <div class="aparece">
+      <div class="eyebrow">07 · La inversión</div>
+      <h2>Lo que cuesta y cómo funciona</h2>
+    </div>
+    <div class="inversion aparece">
+      <div class="inv-precio">
+        <div>
+          <div class="k">Inversión mensual</div>
+          <div class="p" style="margin-top:14px">$3.200<small>al mes · no incluye IVA</small></div>
+        </div>
+        <ul>
+          <li>Equipo completo</li>
+          <li>12 piezas mensuales</li>
+          <li>2 jornadas de grabación</li>
+          <li>3 plataformas: Instagram, Facebook y TikTok</li>
+          <li>Estrategia, publicación y reporte mensual</li>
+        </ul>
+      </div>
+      <div class="inv-cond">
+        <div class="cond">
+          <div class="k">Facturación</div>
+          <p>Mensual, en dos partes.</p>
+          <div class="mitades"><div><b>50%</b>al inicio de cada mes</div><div><b>50%</b>al cierre del mes</div></div>
+        </div>
+        <div class="cond">
+          <div class="k">Revisión de resultados</div>
+          <p>Al cierre del <strong>mes 4</strong>, con datos reales, para ajustar lo que sigue.</p>
+        </div>
+        <div class="cond aparte">
+          <div class="k">Aparte y opcional</div>
+          <p>La pauta y la herramienta de automatización corren aparte y son opcionales — <strong>usted define los montos.</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8 · SIGUIENTE PASO ============ -->
+<section id="siguiente" class="noche cierre">
+  <div class="wrap">
+    <div class="aparece">
+      <div class="eyebrow">08 · Siguiente paso</div>
+      <h2>Si decidimos avanzar</h2>
+      <p class="lead">El lunes 12 arranca el estudio de marca. La última semana de octubre tiene todo en sus manos para
+        aprobar. El lunes 2 de noviembre comienza la producción.</p>
+    </div>
+    <div class="fechas aparece">
+      <div><b>Lun 12 oct</b><span>Arranca el estudio de marca</span></div>
+      <div><b>Sem. 26 oct</b><span>Todo en sus manos para aprobar</span></div>
+      <div><b>Lun 2 nov</b><span>Comienza la producción</span></div>
+    </div>
+    <a class="cta" href="https://wa.me/593984712418?text=Hola%2C%20avancemos%20con%20Banchis" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.2-.3-.2-.5-.3z"/></svg>
+      Avancemos por WhatsApp
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap"><b>Splash Labs</b><span>Estrategia, producción y dirección creativa bajo el mismo techo.</span></div>
+</footer>
+
+<dialog class="visor" id="visor" aria-label="Reproductor de video">
+  <div class="visor-caja">
+    <button class="cerrar" type="button" aria-label="Cerrar">×</button>
+    <video id="visor-video" controls playsinline preload="auto"></video>
+    <div class="vt" id="visor-titulo"></div>
+  </div>
+</dialog>
+
+<script>
+document.documentElement.classList.add('js');
+
+/* ---------- calendario del mes ---------- */
+const TIPOS = {
+  pos:{nombre:'Posicionamiento', color:'var(--t-pos)', texto:'var(--tinta)'},
+  pau:{nombre:'Pauta',           color:'var(--t-pau)', texto:'var(--hueso)'},
+  dis:{nombre:'Diseño',          color:'var(--t-dis)', texto:'var(--hueso)'},
+  esp:{nombre:'Especial',        color:'var(--t-esp)', texto:'var(--hueso)'}
+};
+const DIAS = ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
+/* tres salidas por semana: lunes, miércoles y viernes */
+const SEMANAS = [
+  {pie:'2 posicionamiento + 1 diseño',            piezas:{0:'pos', 2:'pos', 4:'dis'}},
+  {pie:'La especial + 1 posicionamiento + 1 pauta', piezas:{0:'esp', 2:'pos', 4:'pau'}},
+  {pie:'2 posicionamiento + 1 diseño',            piezas:{0:'pos', 2:'pos', 4:'dis'}},
+  {pie:'1 posicionamiento + 1 pauta + 1 diseño',  piezas:{0:'pos', 2:'pau', 4:'dis'}}
+];
+const cal = document.getElementById('cal');
+SEMANAS.forEach((s, i) => {
+  const fila = document.createElement('div');
+  fila.className = 'semana';
+  let html = `<div class="sem"><b>Semana ${i + 1}</b><small>${s.pie}</small></div>`;
+  DIAS.forEach((d, j) => {
+    const t = s.piezas[j];
+    if (!t) { html += '<div class="dia vacio"></div>'; return; }
+    const T = TIPOS[t];
+    html += `<div class="dia"><span class="dl">${d}</span><div class="chip ${t}" data-t="${t}" style="--c:${T.color};--cc:${T.texto}">${T.nombre}${t === 'esp' ? '' : '<small>' + (t === 'dis' ? 'Carrusel o gráfica' : 'Video o diseño') + '</small>'}</div></div>`;
+  });
+  fila.innerHTML = html;
+  cal.appendChild(fila);
+});
+
+/* barra de 12 cuadros */
+const barra = document.getElementById('barra12');
+['pos','pos','pos','pos','pos','pos','pau','pau','dis','dis','dis','esp'].forEach(t => {
+  const i = document.createElement('i');
+  i.dataset.t = t; i.style.setProperty('--c', TIPOS[t].color);
+  barra.appendChild(i);
+});
+
+/* filtro por tipo */
+const filtros = document.getElementById('filtros');
+let activo = null;
+function marcar(t) {
+  activo = t;
+  const on = !!t;
+  cal.classList.toggle('filtrado', on);
+  filtros.classList.toggle('filtrado', on);
+  document.querySelectorAll('.chip, .barra12 i').forEach(el => el.classList.toggle('on', el.dataset.t === t));
+  document.querySelectorAll('.filtro').forEach(b => {
+    b.classList.toggle('on', b.dataset.t === t);
+    b.setAttribute('aria-pressed', b.dataset.t === t);
+  });
+}
+document.querySelectorAll('.filtro').forEach(b => {
+  b.addEventListener('click', () => marcar(activo === b.dataset.t ? null : b.dataset.t));
+});
+
+/* ---------- reproductor ---------- */
+const visor = document.getElementById('visor');
+const vv = document.getElementById('visor-video');
+const vt = document.getElementById('visor-titulo');
+function cerrarVisor() { vv.pause(); vv.removeAttribute('src'); vv.load(); if (visor.open) visor.close(); }
+document.querySelectorAll('.ej').forEach(b => {
+  b.addEventListener('click', () => {
+    vv.src = b.dataset.src;
+    vv.loop = b.hasAttribute('data-loop');
+    vt.innerHTML = `<b>${b.dataset.titulo}</b> · ${b.dataset.desc}`;
+    visor.showModal();
+    vv.play().catch(() => {});
+  });
+});
+visor.querySelector('.cerrar').addEventListener('click', cerrarVisor);
+visor.addEventListener('click', e => { if (e.target === visor || e.target.classList.contains('visor-caja')) cerrarVisor(); });
+visor.addEventListener('close', () => { vv.pause(); vv.removeAttribute('src'); vv.load(); });
+
+/* el packshot corre en bucle solo mientras está en pantalla */
+const bucles = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) e.target.play().catch(() => {}); else e.target.pause();
+}), {threshold:.25});
+document.querySelectorAll('.ej video[autoplay]').forEach(v => bucles.observe(v));
+
+/* ---------- entrada suave y barras de pauta ---------- */
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('vista'); io.unobserve(e.target); }
+}), {threshold:.12, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.aparece, #carriles').forEach(el => io.observe(el));
+
+/* ---------- sección activa en la barra ---------- */
+const links = [...document.querySelectorAll('.nav a')];
+const secciones = links.map(a => document.querySelector(a.getAttribute('href')));
+let actual = -1;
+function seccionActiva() {
+  const y = window.scrollY + window.innerHeight * .35;
+  let idx = 0;
+  secciones.forEach((s, i) => { if (s.offsetTop <= y) idx = i; });
+  if (idx === actual) return;
+  actual = idx;
+  links.forEach((a, i) => a.classList.toggle('activo', i === idx));
+  const a = links[idx];
+  const ol = a.closest('ol');
+  if (ol.scrollWidth > ol.clientWidth) ol.scrollTo({left: a.offsetLeft - 8, behavior:'smooth'});
+}
+let tic = false;
+window.addEventListener('scroll', () => { if (!tic) { tic = true; requestAnimationFrame(() => { seccionActiva(); tic = false; }); } }, {passive:true});
+seccionActiva();
+</script>
+</body>
+</html>
