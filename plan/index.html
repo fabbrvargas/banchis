@@ -174,6 +174,15 @@
   .ej .pie b{display:block;font-size:14.5px;color:var(--frito)}
   .ej:focus-visible{outline:3px solid var(--frito);outline-offset:3px}
 
+  /* piezas de diseño: mismas alturas, ancho según proporción (--r = ancho/alto) */
+  .trio{display:flex;gap:12px;align-items:flex-start}
+  .trio .ej{flex:var(--r) 1 0;min-width:0}
+  .trio .marco{aspect-ratio:var(--r)}
+  .ej.h.img .marco{aspect-ratio:3/2}
+  .ej.img .marco img{object-fit:cover}
+  .trio .pie{padding:8px 10px 9px;font-size:12.5px}
+  .trio .pie b{font-size:13.5px}
+
   /* boceto de carrusel (pieza de diseño) */
   .carrusel{
     display:flex;gap:10px;overflow-x:auto;padding-bottom:10px;scroll-snap-type:x mandatory;
@@ -385,7 +394,8 @@
   dialog.visor[open]{display:grid;place-items:center}
   dialog.visor::backdrop{background:rgba(10,9,7,.92)}
   .visor-caja{position:relative;display:flex;flex-direction:column;align-items:center;gap:12px;padding:56px 16px 20px;width:100%;height:100%;justify-content:center}
-  .visor video{max-height:calc(100vh - 140px);max-width:min(1200px,100%);background:#000;border:var(--b) solid var(--hueso)}
+  .visor video,.visor img{max-height:calc(100vh - 140px);max-width:min(1200px,100%);background:#000;border:var(--b) solid var(--hueso)}
+  .visor [hidden]{display:none}
   .visor .vt{color:var(--hueso);font-size:14.5px;text-align:center}
   .visor .vt b{color:var(--frito)}
   .visor .cerrar{
@@ -405,7 +415,7 @@
 
   /* ---------- responsive ---------- */
   @media (max-width:980px){
-    .pieza{grid-template-columns:1fr}
+    .pieza{grid-template-columns:minmax(0,1fr)}
     .pieza-texto{border-right:0;border-bottom:var(--b) solid var(--tinta)}
     .mes-grid{grid-template-columns:1fr}
     .mes-lado{display:grid;grid-template-columns:1fr 1fr;align-items:start}
@@ -501,8 +511,9 @@
       <h2>No todas las piezas hacen lo mismo</h2>
       <p class="lead">Cada una tiene un trabajo distinto, y el mes se arma combinándolas. Tanto las piezas de
         posicionamiento como las de pauta pueden ser video o diseño — <strong>lo que las define es su objetivo, no su formato.</strong></p>
-      <p class="nota-ej">Los ejemplos son trabajos nuestros para otras marcas. Sirven para ver el tipo de pieza y el nivel
-        de acabado; las de Banchis tendrán su propio lenguaje visual, el que definimos en el arranque.</p>
+      <p class="nota-ej">Los videos son trabajos nuestros para otras marcas: sirven para ver el tipo de pieza y el nivel de
+        acabado. Las piezas de diseño ya están hechas con productos de Banchis. El lenguaje visual definitivo de la marca
+        lo definimos juntos en el arranque.</p>
       <div class="leyenda-mini">
         <a href="#p-pos"><i class="punto" style="--c:var(--t-pos)"></i>Posicionamiento</a>
         <a href="#p-pau"><i class="punto" style="--c:var(--t-pau)"></i>Pauta</a>
@@ -578,7 +589,27 @@
         </dl>
       </div>
       <div class="pieza-ej">
-        <div class="ej-titulo">Cómo se arma un carrusel de línea de productos</div>
+        <div class="ej-titulo">Ejemplos hechos para Banchis</div>
+        <button class="ej h img" type="button" data-img="../media/diseno-mockup.jpg" data-titulo="Banchis" data-desc="Así se ven en el perfil">
+          <div class="marco"><img src="../media/diseno-mockup.jpg" alt="Tres piezas de Banchis vistas en teléfonos: una story y dos publicaciones de Instagram" loading="lazy">
+            <span class="play"><svg viewBox="0 0 24 24"><path d="M15 3h6v6h-2V6.4l-4.3 4.3-1.4-1.4L17.6 5H15zM3 15h2v2.6l4.3-4.3 1.4 1.4L6.4 19H9v2H3z"/></svg>Ampliar</span></div>
+          <div class="pie"><b>Así se ven en el perfil</b>Una story y dos publicaciones, con el lenguaje de la marca</div>
+        </button>
+        <div class="trio">
+          <button class="ej img" type="button" data-img="../media/diseno-crujido.jpg" data-titulo="El sabor de lo nuestro" data-desc="Publicación · posicionamiento" style="--r:.8">
+            <div class="marco"><img src="../media/diseno-crujido.jpg" alt="Publicación: El sabor de lo nuestro, en cada crujido, con un bowl de chifles" loading="lazy"></div>
+            <div class="pie"><b>Publicación</b>Memoria de marca</div>
+          </button>
+          <button class="ej img" type="button" data-img="../media/diseno-picante.jpg" data-titulo="Sabor picante" data-desc="Publicación · producto" style="--r:.8">
+            <div class="marco"><img src="../media/diseno-picante.jpg" alt="Publicación: empaque de chifles Banchis sabor picante sobre fondo rojo" loading="lazy"></div>
+            <div class="pie"><b>Publicación</b>El producto, protagonista</div>
+          </button>
+          <button class="ej img" type="button" data-img="../media/diseno-limon-story.jpg" data-titulo="Toque de limón" data-desc="Story" style="--r:.5625">
+            <div class="marco"><img src="../media/diseno-limon-story.jpg" alt="Story: empaque de chifles Banchis sabor limón sostenido por una garra, con el texto El mismo sabor de siempre" loading="lazy"></div>
+            <div class="pie"><b>Story</b>Vertical, para historias</div>
+          </button>
+        </div>
+        <div class="ej-titulo" style="margin-top:14px">Y así se arma un carrusel de línea de productos</div>
         <div class="carrusel" aria-label="Boceto de carrusel, deslice para ver las láminas">
           <div class="lamina portada"><span class="n">1 / 6</span><span class="t">Todo esto también es <i>Banchis</i></span><span class="s">Deslice →</span></div>
           <div class="lamina"><span class="n">2 / 6</span><span class="bolsa">Chifles</span><span class="t">Chifles</span></div>
@@ -873,6 +904,7 @@
   <div class="visor-caja">
     <button class="cerrar" type="button" aria-label="Cerrar">×</button>
     <video id="visor-video" controls playsinline preload="auto"></video>
+    <img id="visor-img" alt="" hidden>
     <div class="vt" id="visor-titulo"></div>
   </div>
 </dialog>
@@ -940,12 +972,20 @@ document.querySelectorAll('.filtro').forEach(b => {
 const visor = document.getElementById('visor');
 const vv = document.getElementById('visor-video');
 const vt = document.getElementById('visor-titulo');
+const vi = document.getElementById('visor-img');
 function cerrarVisor() { vv.pause(); vv.removeAttribute('src'); vv.load(); if (visor.open) visor.close(); }
 document.querySelectorAll('.ej').forEach(b => {
   b.addEventListener('click', () => {
+    const esImg = b.hasAttribute('data-img');
+    vv.hidden = esImg; vi.hidden = !esImg;
+    vt.innerHTML = `<b>${b.dataset.titulo}</b> · ${b.dataset.desc}`;
+    if (esImg) {
+      vi.src = b.dataset.img; vi.alt = b.querySelector('img').alt;
+      visor.showModal();
+      return;
+    }
     vv.src = b.dataset.src;
     vv.loop = b.hasAttribute('data-loop');
-    vt.innerHTML = `<b>${b.dataset.titulo}</b> · ${b.dataset.desc}`;
     visor.showModal();
     vv.play().catch(() => {});
   });
